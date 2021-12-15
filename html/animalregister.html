@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal register</title>
+</head>
+<body>
+    <form class="animalform"action="">
+    <p>Animal register</p>
+    <label for="animaltype">Animal Type </label>
+    <input type="text" name="animaltype" id="animaltype" list="typelist" required>
+    <label for="animalname">Name</label>
+    <input type="text" name="animalname" id="animalname" list="namelist" required>
+    <br>
+    <label for="animalgender">Gender</label>
+    <input type="text" name="animalgender" id="animalgender" list="genderlist" required>
+    <label for="dob" name="dob" >Date of birth</label>
+    <input type="date" name="dob" id="dob" max="2021-12-31" required>
+    <br>
+    <label for="color">color</label>
+    <input type="text" name="color" id="color" list="colors" required>
+    <label for="price">price</label>
+    <input type="number"5 name="price" id="price" min="0" required>
+    <br>
+    <label for="Accountnumber">AccountNumber</label>
+    <input type="number" name="Accountnumber" id="Accountnumber" min="0" required>
+    <br>
+    <label for="description">Description</label>
+    <textarea name="description" id="description" cols="30" required></textarea>
+    <datalist id="typelist">
+        <option value="Dog"></option>
+        <option value="Cat"></option>
+        <option value="Birds"></option>
+        <option value="Fish"></option>
+    </datalist>
+    <datalist id="namelist">
+        <option value="french bulldog"></option>
+        <option value="German Shepherd"></option>
+        <option value="Maine Coon"></option>
+        <option value="Ragdoll"></option>
+        <option value="Parakeets"></option>
+        <option value="Cockatiels"></option>
+        <option value="Angelfish"></option>
+        <option value="Rainbow"></option>
+    </datalist>
+    <datalist id="genderlist">
+        <option value="Male"></option>
+        <option value="Female"></option>
+    </datalist>
+    <datalist id="colors">
+        <option value="Black"></option>
+        <option value="White"></option>
+        <option value="Gray"></option>
+        <option value="Gold"></option>
+        <option value="Sliver"></option>
+        <option value="Green"></option>
+        <option value="Rainbow"></option>
+        <option value="Blue"></option>
+    </datalist>
+</form>
+</body>
+</html>

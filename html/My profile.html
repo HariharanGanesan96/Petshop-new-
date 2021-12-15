@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    display: inline;
+    width: 300px;
+}
+#menu {
+    height: 40px;
+    display: inline;
+}
+#menu li{
+    display: inline;
+}
+#menu a{
+    color: black;
+    text-decoration: none;
+    float: right;
+    padding-right: 20px;
+}
+#profile{
+    width: 500px;
+    height: 500px;
+    border: 1px solid;
+    border-color: black;
+    border-radius: 20px;
+    margin-left: 50PX;
+}
+#profileimage{
+     width: 200px;
+     height: 180px;
+     margin: 20px 100px 10px 135px;
+     border: 1px solid;
+     border-radius: 50%;
+}
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="navigation">
+        <h1>ABS MARKET</h1>
+        <ul  id="menu">
+        <li><a href="">My Profile</a></li>
+        <li><a href="">My cart</a></li>
+        <li><a href="">my orders</a></li>
+        <li><a href="">Add item</a></li>
+        </ul>
+        </div>
+        <div id="profile">
+           <div id="profileimage" >
+           </div>
+           <div>
+               <label for="firstname">FirstName</label>
+               <input type="text" name=firstname id="firstname" value="">
+               <button type="button"></button>
+           </div>
+        </div>
+    </div>
+</body>
+</html>

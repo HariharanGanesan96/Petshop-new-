@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABS Register</title>
+</head>
+<body>
+     <!--Animal register-->
+    <form action="" class="registerform">
+        <p>Register here</p>
+        <label for="firstname">FirstName <span>*</span></label>
+        <input type="text" name="firstname" id="firstnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Firstname" required>
+         <label for="lastname">LastName <span>*</span></label>
+        <input type="text" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required>
+        <br>
+        <label for="username">UserName <span>*</span></label>
+        <input type="text" name="username" id="usernameinput" placeholder="username" pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required>
+        <label for="password">Password <span>*</span></label>
+        <input type="password" name="password" id="passwordinput" placeholder="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,15}" required>
+        <br>
+        <label for="repassword">Re-Password<span>*</span></label>
+        <input type="password"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required>
+        <br>    
+        <label for="mobile">MobileNumber<span>*</span></label>
+        <input type="text" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required>
+        <label for="email" >Email<span>*</span></label>
+        <input type="email" name="email" id="emailinput" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required>
+        <br>
+        <button type="submit" id="register">Register</button>
+        <button type="reset" id="reset">Reset</button>
+    </form>
+</body>
+</html>
