@@ -98,26 +98,13 @@ public class Customers {
 		this.image = image;
 	}
 	
+	
 	@Override
-	public int hashCode() {
-		return Objects.hash(address, bank, customerId, email, firstName, gender, image, lastName, number, password,
-				pincode, regDate, userName);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Customers other = (Customers) obj;
-		return Objects.equals(address, other.address) && bank == other.bank && customerId == other.customerId
-				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(gender, other.gender) && Objects.equals(image, other.image)
-				&& Objects.equals(lastName, other.lastName) && number == other.number
-				&& Objects.equals(password, other.password) && pincode == other.pincode
-				&& Objects.equals(regDate, other.regDate) && Objects.equals(userName, other.userName);
+	public String toString() {
+		return "Customers [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + ", email=" + email + ", number=" + number
+				+ ", bank=" + bank + ", regDate=" + regDate + ", address=" + address + ", pincode=" + pincode
+				+ ", gender=" + gender + ", image=" + image + "]";
 	}
 	public Customers() {
 		super();

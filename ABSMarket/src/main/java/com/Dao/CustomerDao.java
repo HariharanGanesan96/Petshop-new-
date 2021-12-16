@@ -8,13 +8,10 @@ import com.ABSClass.Customers;
 
 public class CustomerDao {
 
-	public static Connectionutil con() {
-		Connectionutil obj = new Connectionutil();
-		return obj;
-	}
+	
+	Connectionutil obj = new Connectionutil();
 	
 	public void insert(Customers cus) throws ClassNotFoundException, SQLException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "insert into Animals_Customers(customer_firstname,customer_lastname,"
 				+ "customer_username,customer_password,customer_email,customer_mobilenumber,customer_gender)\r\n"
@@ -32,7 +29,6 @@ public class CustomerDao {
 	}
 
 	public void update(Customers cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "update animals_Customers set customer_bank=?,customer_address=?,customer_pincode=? where customer_id=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -43,8 +39,7 @@ public class CustomerDao {
 		System.out.println(pstmt.executeUpdate() + " rows updated");
 	}
 	
-    public void updatebank(Customers cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
+    public void updateBank(Customers cus) throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
 		String query = "update animals_Customers set customer_bank=? where customer_id=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -54,7 +49,6 @@ public class CustomerDao {
 	}
 	
     public void updateAddress(Customers cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "update animals_Customers set customer_address=?,customer_pincode=? where customer_id=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -65,7 +59,6 @@ public class CustomerDao {
 	}
 
 	public void delete(Customers cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "delete from Animals_Customers where customer_id=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -74,7 +67,6 @@ public class CustomerDao {
 	}
 	
 	public String cusValidation(Customers cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "select customer_firstname from animals_customers where customer_username=? and customer_password=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -100,15 +92,14 @@ public class CustomerDao {
 	}
 	
 	public boolean ValidatUsername(String cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
-		boolean flag=true;
+		boolean flag=false;
 		String query = "select * from animals_customers where customer_username=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, cus);
 		ResultSet re = pstmt.executeQuery();
 		if (re.next()) {
-			flag= false;
+			flag= true;
 		}
 		else if(true){
 			 query = "select * from animals_adminuser where admin_username=?";
@@ -116,22 +107,21 @@ public class CustomerDao {
 				pstmt.setString(1, cus);
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
-					flag= false;
+					flag= true;
 				}
      	}	
 		return flag;
 	}
 	
     public boolean ValidateEmail(String cus) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
-		boolean flag=true;
+		boolean flag=false;
 		String query = "select * from animals_customers where customer_email=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, cus);
 		ResultSet re = pstmt.executeQuery();
 		if (re.next()) {
-			flag=false;
+			flag=true;
 		}
 		else if(true){
 			 query = "select e.employee_email from animals_adminuser a inner join animals_employees e on"
@@ -140,20 +130,20 @@ public class CustomerDao {
 				pstmt.setString(1, cus);
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
-					flag=false;
+					flag=true;
 				}
      	}	
 		return flag;
 	}
 	
     public void showAnimalCustomerDao() throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
-		String query = "select Customer_firstname from Animals_customers";
+		String query = "select * from Animals_customers";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet re = pstmt.executeQuery();
 		while (re.next()) {
-			System.out.println(re.getString(1));
+//		Customers user=new Customers(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getString(5),
+//				                     re.getString(6),re.getInt(7),re.getString(8),re.getDate(9),re.getString(10),re.getInt(11),re.getString(12),re.getString(13));
 		}
 
 	}

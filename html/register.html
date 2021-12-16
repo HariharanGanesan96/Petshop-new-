@@ -5,31 +5,110 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABS Register</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #background{
+            background: url("https://images.pexels.com/photos/4426354/pexels-photo-4426354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+        .registerform{
+            border: 1px solid;
+            border-color: black;
+            border-radius: 10px;
+            width: 400px;
+            height: 480px;
+            position: absolute;
+            left: 65%;
+            top: 10%;
+            background-color: rgb(218, 231, 207);
+        }
+        table{
+            padding-top: 20px;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        table tr,td{
+            padding-left: 25px;
+            padding-top: 20px;
+        }
+        table button{
+            height: 30px;
+            width: 120px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(80, 241, 59);
+            color: white;
+            font-weight: bolder;
+        }
+        table input{
+            height: 25px;
+            border: 1px solid;
+            padding-left: 10px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: rgb(148, 145, 145);
+            background-color: transparent;
+        }
+        table button:hover{
+        background-color: white;
+        color: black;
+        }
+        table span{
+            color: red;
+        }
+    </style>
 </head>
 <body>
      <!--Animal register-->
+<div id="background">
     <form action="" class="registerform">
-        <p>Register here</p>
-        <label for="firstname">FirstName <span>*</span></label>
-        <input type="text" name="firstname" id="firstnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Firstname" required>
-         <label for="lastname">LastName <span>*</span></label>
-        <input type="text" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required>
-        <br>
-        <label for="username">UserName <span>*</span></label>
-        <input type="text" name="username" id="usernameinput" placeholder="username" pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required>
-        <label for="password">Password <span>*</span></label>
-        <input type="password" name="password" id="passwordinput" placeholder="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,15}" required>
-        <br>
-        <label for="repassword">Re-Password<span>*</span></label>
-        <input type="password"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required>
-        <br>    
-        <label for="mobile">MobileNumber<span>*</span></label>
-        <input type="text" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required>
-        <label for="email" >Email<span>*</span></label>
-        <input type="email" name="email" id="emailinput" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required>
-        <br>
-        <button type="submit" id="register">Register</button>
-        <button type="reset" id="reset">Reset</button>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Register here </th>
+                    <th></th>                 
+                </tr>
+                <tr>
+                    <td><label for="firstname">FirstName <span>*</span></label></td>
+                    <td><input type="text" name="firstname" id="firstnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Firstname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="lastname">LastName <span>*</span></label></td>
+                    <td><input type="text" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required></td>
+                </tr>
+                <tr>
+                     <td><label for="username">UserName <span>*</span></label></td>
+                     <td><input type="text" name="username" id="usernameinput" placeholder="username" pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password <span>*</span></label></td>
+                    <td><input type="password" name="password" id="passwordinput" placeholder="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,15}" required></td>
+                </tr>
+                <tr>
+                    <td><label for="repassword">Re-Password<span>*</span></label></td>
+                    <td><input type="password"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required></td>
+                </tr>
+                <tr>
+                    <td><label for="mobile">Mobile Number<span>*</span></label></td>
+                    <td><input type="text" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required></td>
+                </tr>
+                <tr>
+                    <td><label for="email" >Email<span>*</span></label></td>
+                    <td><input type="email" name="email" id="emailinput" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" id="register">Register</button></td>
+                    <td><button type="reset" id="reset">Reset</button></td>
+                </tr>
+            </thead>
+        </table>      
     </form>
+</div>
 </body>
 </html>
