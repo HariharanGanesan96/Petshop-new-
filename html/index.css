@@ -10,20 +10,51 @@ h1{
     position: absolute;
     top: 24%;
     left: 70%;
-    border: 1px solid;
-    border-color: black;
-    width: 300px;
+    border: 1px solid transparent;
+    width: 290px;
     height: 280px;
     padding: 20px;
+    padding-left: 35px;
     line-height: 2;
     font-family: 'Times New Roman', Times, serif;
     font-size: 18px;
-    border-radius: 10px;
-    background-color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: rgba(224, 224, 224, 0.918);
     color: black;
 }
+#head{
+    text-align: center;
+    font-size: 25px;
+    margin-top: -5px;
+}
+ form input{
+         height: 30px;
+         width: 250px;
+         background: transparent;
+         border-top: none;
+         border-left: none;
+         border-right: none;
+         border-bottom: 1px solid rgb(160, 155, 155);    
+         color: black;     
+ }
+ form input:focus{
+    outline: none;
+    }
+ form button{
+     height: 30px;
+     width: 130px;
+     margin-top: 10px;
+     background-color: rgb(241, 123, 102);
+     color: white;
+     border-radius: 5px;
+     border: none;
+     font-weight: bold;
+     font-size: 15px;
+
+ }
 #background{
-    background: url("https://wallpapercave.com/wp/wp5611846.jpg");
+    background: url("https://images.pexels.com/photos/4148860/pexels-photo-4148860.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     height: 100vh;
     color: white;
     background-repeat: no-repeat;

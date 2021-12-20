@@ -17,36 +17,42 @@
             height: 100vh;
         }
         .registerform{
-            border: 1px solid;
-            border-color: black;
-            border-radius: 10px;
+            border: none;
+            border-radius: 15px;
             width: 400px;
             height: 480px;
             position: absolute;
             left: 65%;
             top: 10%;
-            background-color: rgb(218, 231, 207);
+            background-color:  rgba(224, 224, 224, 0.986);
+        }
+        #registername{
+            font-size: 25px;
         }
         table{
             padding-top: 20px;
             font-size: 20px;
             font-weight: normal;
+            padding-left: 20px;
         }
         table tr,td{
-            padding-left: 25px;
+            padding-left: 0px;
             padding-top: 20px;
         }
         table button{
             height: 30px;
             width: 120px;
             border: none;
+            border: 1PX solid rgb(72, 224, 52);
             border-radius: 5px;
-            background-color: rgb(80, 241, 59);
+            background-color: rgb(72, 224, 52);
             color: white;
             font-weight: bolder;
+            font-size: 15px;
         }
         table input{
             height: 25px;
+            width: 200px;
             border: 1px solid;
             padding-left: 10px;
             border-top: none;
@@ -54,6 +60,11 @@
             border-right: none;
             border-color: rgb(148, 145, 145);
             background-color: transparent;
+            font-size: 15px;
+        }
+        table input:focus{
+        outline: none;
+        background-color: transparent;
         }
         table button:hover{
         background-color: white;
@@ -71,7 +82,7 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2">Register here </th>
+                    <th id="registername" colspan="2">Register here </th>
                     <th></th>                 
                 </tr>
                 <tr>

@@ -5,15 +5,30 @@ import java.util.Objects;
 
 public class Admin {
     private int adminId;
+    private String firstName;
+    private String lastName;
     private String userName;
     private String password;
-    private int employeeId;
+    private String email;
+    private long number;
     private Date registerDate;
 	public int getAdminId() {
 		return adminId;
 	}
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getUserName() {
 		return userName;
@@ -27,11 +42,17 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getEmployeeId() {
-		return employeeId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public long getNumber() {
+		return number;
+	}
+	public void setNumber(long number) {
+		this.number = number;
 	}
 	public Date getRegisterDate() {
 		return registerDate;
@@ -40,48 +61,39 @@ public class Admin {
 		this.registerDate = registerDate;
 	}
 	@Override
-	public int hashCode() {
-		return Objects.hash(adminId, employeeId, password, registerDate, userName);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Admin other = (Admin) obj;
-		return adminId == other.adminId && employeeId == other.employeeId && Objects.equals(password, other.password)
-				&& Objects.equals(registerDate, other.registerDate) && Objects.equals(userName, other.userName);
-	}
-	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", userName=" + userName + ", password=" + password + ", employeeId="
-				+ employeeId + ", registerDate=" + registerDate + "]";
+		return "Admin [adminId=" + adminId + ",\n firstName=" + firstName + ",\n lastName=" + lastName + ",\n userName="
+				+ userName + ",\n password=" + password + ",\n email=" + email + ",\n number=" + number + ",\n registerDate="
+				+ registerDate + "]";
 	}
 	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Admin(int adminId, String password) {
+	
+	public Admin(int adminId, String firstName, String lastName, String userName, String password, String email,
+			long number) {
 		super();
 		this.adminId = adminId;
-		this.password = password;
-	}
-	public Admin(int adminId, String userName, String password, int employeeId) {
-		super();
-		this.adminId = adminId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
-		this.employeeId = employeeId;
+		this.email = email;
+		this.number = number;
 	}
-	public Admin(int adminId, String userName, String password, int employeeId, Date registerDate) {
+	public Admin(int adminId, String firstName, String lastName, String userName, String password, String email,
+			long number, Date registerDate) {
 		super();
 		this.adminId = adminId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
-		this.employeeId = employeeId;
+		this.email = email;
+		this.number = number;
 		this.registerDate = registerDate;
-	}	
+	}
+	
+    
 }

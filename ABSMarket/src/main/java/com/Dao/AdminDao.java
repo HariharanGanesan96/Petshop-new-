@@ -10,6 +10,7 @@ import com.ABSClass.Admin;
 
 
 public class AdminDao {
+	Connectionutil obj = new Connectionutil();
 	
 	public void insert(Admin adm) throws SQLException, ClassNotFoundException {
 
@@ -20,7 +21,6 @@ public class AdminDao {
 	pstmt.setInt(1, adm.getAdminId());
 	pstmt.setString(2, adm.getUserName());
 	pstmt.setString(3, adm.getPassword());
-	pstmt.setInt(4, adm.getEmployeeId());
 	pstmt.setDate(5, adm.getRegisterDate());
 	
 	System.out.println(pstmt.executeUpdate() + " rows inserted");
@@ -45,16 +45,18 @@ public void delete(Admin anim) throws SQLException, ClassNotFoundException {
 	System.out.println(pstmt.executeUpdate() + " rows deleted");
 }
 
-public void show() throws SQLException, ClassNotFoundException {
-	Connectionutil obj = new Connectionutil();
+public Admin show(String username) throws SQLException, ClassNotFoundException {
+	
 	Connection con = obj.getDbConnect();
-	String query = "select Admin_username from animals_Adminuser";
+	Admin admin=null;
+	String query = "select * from Admin_details where admin_username='"+username+"'";
 	PreparedStatement pstmt = con.prepareStatement(query);
 	ResultSet re = pstmt.executeQuery();
 	while (re.next()) {
-		System.out.println(re.getString(1));
+	   admin=new Admin(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getString(4),re.getString(6),
+			          re.getLong(7),re.getDate(8));
 	}
-
+     return admin;
 }
 
 }

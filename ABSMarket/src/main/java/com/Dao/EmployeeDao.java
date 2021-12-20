@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.ABSClass.Animals;
+import com.ABSClass.PetDetails;
 import com.ABSClass.Employee;
 
 public class EmployeeDao {
@@ -38,12 +38,12 @@ public class EmployeeDao {
 		System.out.println(pstmt.executeUpdate() + " rows updated");
 	}
 
-	public void delete(Animals anim) throws SQLException, ClassNotFoundException {
+	public void delete(PetDetails anim) throws SQLException, ClassNotFoundException {
 		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
 		String query = "delete from animals_employees where employee_id=?";
 		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1, anim.getAnimalId());
+		pstmt.setInt(1, anim.getPetId());
 		System.out.println(pstmt.executeUpdate() + " rows deleted");
 	}
 
