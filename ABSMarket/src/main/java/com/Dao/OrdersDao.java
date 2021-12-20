@@ -11,13 +11,14 @@ public class OrdersDao {
 
 		Connectionutil obj = new Connectionutil();
 		Connection con = obj.getDbConnect();
-		String query = "insert into animals_orders(Order_id,Customer_id,order_date,price) \r\n"
-				+ "values(?,?,?,?)";
+		String query = "insert into orders(pet_id,Customer_id,quantity,unit_price,total_price) \r\n"
+				+ "values(?,?,?,?,?)";
 		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1, ord.getOrderId());
+		pstmt.setInt(1, ord.getPetId());
 		pstmt.setInt(2, ord.getCustomerId());
-		pstmt.setDate(3, ord.getOrderDate());
-		pstmt.setDouble(4, ord.getPrice());
+		pstmt.setInt(3, ord.getQty());
+		pstmt.setDouble(4, ord.getUnitPrice());
+		pstmt.setDouble(5, ord.getTotalprice());
 		int i=pstmt.executeUpdate();
 		System.out.println( i+ " rows inserted");
 	}

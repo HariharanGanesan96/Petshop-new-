@@ -75,13 +75,23 @@ public class OrderItems {
 		this.itemId = itemId;
 		this.quantity = quantity;
 	}
-	public OrderItems(int itemId, int orderId, int animalId, int quantity, double unitPrice) {
+	public OrderItems(int orderId, int animalId, int quantity, double unitPrice, double totalPrice) {
+		super();
+		this.orderId = orderId;
+		this.animalId = animalId;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.totalPrice = totalPrice;
+	}
+	public OrderItems(int itemId, int orderId, int animalId, int quantity, double unitPrice, double totalPrice) {
 		super();
 		this.itemId = itemId;
 		this.orderId = orderId;
 		this.animalId = animalId;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
+		this.totalPrice = totalPrice;
 	}
+	
 	
 }

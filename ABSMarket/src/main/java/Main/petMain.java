@@ -8,9 +8,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import com.ABSClass.Customers;
+import com.ABSClass.OrderItems;
+import com.ABSClass.Orders;
 import com.ABSClass.PetDetails;
 import com.Dao.AnimalsDao;
-
+import com.Dao.OrderItemsDao;
+import com.Dao.OrdersDao;
 public class petMain {
 	
 	public void petDetils(Customers customer) throws ClassNotFoundException, SQLException, ParseException {
@@ -267,6 +270,21 @@ public class petMain {
             	for (PetDetails i : petList) {
     				System.out.println(i);
     			}
+            	
+            	String choice = null;
+            	do {
+            		System.out.println("enter pet id need to order");
+            		int petId=Integer.parseInt(scan.nextLine());
+            		PetDetails petdetails=animalDao.showPet(petId);
+            		System.out.println("enter the quantity");         		
+            		int qty=Integer.parseInt(scan.nextLine());
+            		Orders orders=new Orders(petId,customer.getCustomerId(),qty,petdetails.getPetprice(),
+            				(qty*petdetails.getPetprice()));
+            		OrdersDao ordersDao=new OrdersDao();
+            		ordersDao.insert(orders);
+            		System.out.println("do you want Continue yes/no");
+            		choice=scan.nextLine();
+            	}while(choice.equals("yes"));
             	break;
             	
             

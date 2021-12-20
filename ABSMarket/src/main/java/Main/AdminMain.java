@@ -38,7 +38,17 @@ public class AdminMain {
 			else {
 				System.out.println("Choice other operation");
 			}
+			System.out.println("Do you want delete user yes/no");
+			String deleteChoice=scan.nextLine().toLowerCase();
+			if(deleteChoice.equals("yes")) {
+				System.out.println("Enter the youser id to delete");
+				
+			}
+	
+			
 			break;
+			
+			
 		case 2:
 			// 
 			AnimalsDao animalDao=new AnimalsDao();
@@ -58,11 +68,7 @@ public class AdminMain {
 			animalDao.updateStatus(petId, status,admin.getAdminId());
 			System.out.println("do you want continue y/n");
 			c=scan.nextLine().toLowerCase().charAt(0);
-			}while(c=='y');
-			
-			
-			
-	
+			}while(c=='y');	
 		}
 	}
 

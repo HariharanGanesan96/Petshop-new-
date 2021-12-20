@@ -69,6 +69,21 @@ public class AnimalsDao {
 		}	
 		return petlist;	
 	}
+	public PetDetails showPet(int petId) throws SQLException, ClassNotFoundException {
+		Connection con = obj.getDbConnect();
+		String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate"
+				+ " from pet_details where pet_id=?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		PetDetails pet=null;
+		pstmt.setInt(1,petId );
+		ResultSet re = pstmt.executeQuery();
+		while (re.next()) {
+			 pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
+					re.getDate(5),re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
+					re.getDate(11));
+		}	
+		return pet;	
+	}
 	public List<PetDetails> showAllNotapproved() throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
 		List<PetDetails> petlist=new ArrayList<PetDetails>();

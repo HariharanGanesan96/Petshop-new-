@@ -119,7 +119,6 @@ public class TestMain2 {
 				} else {
 					System.out.println("length must be in 10 character");
 				}
-
 			}
 
 			// input gender
@@ -177,6 +176,7 @@ public class TestMain2 {
 
 			if (valdata != null) {
 				String name = valdata.substring(1);
+				// customer login
 				if (valdata.charAt(0) == '1') {
 					System.out.println("welcome user: " + name);
 					Customers customer = new Customers();
@@ -185,9 +185,6 @@ public class TestMain2 {
 					CustomerMain customermain=new CustomerMain();
 					customermain.customer(customer);
 				}
-						
-						
-											
 				
 				// admin user login
 				else {
