@@ -1,11 +1,12 @@
-package com.Dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.ABSClass.PetDetails;
-import com.ABSClass.Employee;
+
+import com.model.Employee;
+import com.model.PetDetails;
 
 public class EmployeeDao {
 	

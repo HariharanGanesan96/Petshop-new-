@@ -1,4 +1,4 @@
-package com.Dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ABSClass.Customers;
+import com.model.Customers;
 
 public class CustomerDao {
 

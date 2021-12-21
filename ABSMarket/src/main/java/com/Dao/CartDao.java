@@ -1,11 +1,11 @@
-package com.Dao;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ABSClass.Carts;
+import com.model.Carts;
 
 
 public class CartDao {
