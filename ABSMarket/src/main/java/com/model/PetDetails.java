@@ -110,12 +110,15 @@ public class PetDetails {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "Animals [petId=" + petId + ",\n petType=" + petType + ",\n petName=" + petName + ",\n petGender=" + petGender
-				+ ",\n petDob=" + petDob + ",/n petQty=" + petQty + ",\n description=" + description + ",\n petColor="
-				+ petColor + ",\n petprice=" + petprice + ",\n petImage=" + petImage + ",\n status=" + status
-				+ ",\n customerId=" + customerId + ",\n adminId=" + adminId + ",\n regDate=" + regDate + "]";
+		return "PetDetails [petId=" + petId + ", petType=" + petType + ", petName=" + petName + ", petGender="
+				+ petGender + ", petDob=" + petDob + ", petQty=" + petQty + ", description=" + description
+				+ ", petColor=" + petColor + ", petprice=" + petprice + ", petImage=" + petImage + ", status=" + status
+				+ ", customerId=" + customerId + ", adminId=" + adminId + ", regDate=" + regDate + ", avilableQty="
+				+ avilableQty + "]";
 	}
 	public PetDetails() {
 		super();

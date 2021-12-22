@@ -11,20 +11,18 @@ import com.model.CartItems;
 import com.model.Customers;
 import com.model.OrderItems;
 
-
-
 public class CartItemsDao {
 	
 	       // To get Connection from connection util
 	       Connectionutil obj = new Connectionutil();
-	
+	       PreparedStatement pstmt =null;
 	       public void insert(CartItems cartit) {		
 		Connection con;
 	
 		try {
 			con = obj.getDbConnect();
 			String query = "insert into Cart_items(pet_id,customer_id,quantity,unit_price,total_price) values(?,?,?,?,?)";
-			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, cartit.getPetId());
 			pstmt.setInt(2, cartit.getCustomerId());
 			pstmt.setInt(3, cartit.getQuantity());
@@ -51,26 +49,25 @@ public class CartItemsDao {
 		System.out.println(pstmt.executeUpdate() + " rows updated");
 	}
 
-	public void delete(CartItems cartit) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
+	public void delete(int itemId) throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
-		String query = "delete from cartitems where item_id=?";
+		String query = "delete from cart_items where item_id="+itemId+"";
 		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1, cartit.getItemId());
 		System.out.println(pstmt.executeUpdate() + " rows deleted");
 	}
 
 	
-	public List<OrderItems> show(Customers cus) throws SQLException, ClassNotFoundException {
+	public List<CartItems> show(Customers cus) throws SQLException, ClassNotFoundException {
 		
 		Connection con = obj.getDbConnect();
-		List<OrderItems> cartList= new ArrayList<OrderItems>();
-		OrderItems orderItem=null;
+		List<CartItems> cartList= new ArrayList<CartItems>();
+		CartItems cartItem=null;
 		String query = "select * from cart_items where customer_id='"+cus.getCustomerId()+"'";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet re = pstmt.executeQuery();
 		while (re.next()) {
-			orderItem=new OrderItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
+			cartItem=new CartItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
+		cartList.add(cartItem);
 		}
       return cartList;
 	}

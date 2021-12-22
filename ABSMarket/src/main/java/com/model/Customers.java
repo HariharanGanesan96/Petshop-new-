@@ -132,12 +132,14 @@ public class Customers {
 	}
   
 	
+	
+
 	@Override
 	public String toString() {
-		return "Customers [customerId=" + customerId + ",\n firstName=" + firstName + ",\n lastName=" + lastName
-				+ ",\n userName=" + userName + ",\n password=" + password + ",\n email=" + email + ",\n number=" + number
-				+ ",\n bank=" + bank + ",\n regDate=" + regDate + ",\n address=" + address + ",\n city=" + city + ",\npincode="
-				+ pincode + ",\n gender=" + gender + ",\n image=" + image + "]";
+		return "Customers [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", password=" + password + ", email=" + email + ", number=" + number
+				+ ", bank=" + bank + ", regDate=" + regDate + ", address=" + address + ", city=" + city + ", pincode="
+				+ pincode + ", gender=" + gender + ", image=" + image + "]";
 	}
 
 	public Customers() {

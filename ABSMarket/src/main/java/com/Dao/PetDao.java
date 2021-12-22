@@ -13,8 +13,6 @@ public class PetDao {
               
 	   SimpleDateFormat formeter=new SimpleDateFormat("dd-mm-yyyy");
 	   Connectionutil obj = new Connectionutil();
-	   
-	   
 	 // insert operation from user
 	public void insert(PetDetails pet) throws SQLException, ClassNotFoundException {
 
@@ -62,7 +60,7 @@ public class PetDao {
 	// to show all the approved pet details
 	public List<PetDetails> showAllpets() throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
-		List<PetDetails> petlist=new ArrayList<PetDetails>();
+		List<PetDetails> petList=new ArrayList<PetDetails>();
 		String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate,available_qty"
 				+ " from pet_details where status='approved' and available_qty >0";
 		PreparedStatement pstmt = con.prepareStatement(query);
@@ -71,11 +69,12 @@ public class PetDao {
 			PetDetails pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
 					re.getDate(5),re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
 					re.getDate(11),re.getInt(12));
-			petlist.add(pet);
+			petList.add(pet);
+		
 		}	
-		return petlist;	
+		return petList;	
 	}
-	
+
 	// to get particular pet data
 	public PetDetails showPet(int petId) throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
@@ -94,21 +93,20 @@ public class PetDao {
 	}
 	
 	// pet list to show admin
-	public List<PetDetails> showAllNotapproved() throws SQLException, ClassNotFoundException {
+	public void showAllNotapproved() throws SQLException, ClassNotFoundException {
 		Connection con = obj.getDbConnect();
-		List<PetDetails> petlist=new ArrayList<PetDetails>();
 		String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,"
 				+ "pet_color,pet_qty,pet_price,pet_image,status,customer_id,pet_registerdate,available_qty"
 				+ " from pet_details where status='Not approved'";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet re = pstmt.executeQuery();
 		while (re.next()) {
-			PetDetails pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
-					re.getDate(5),re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10)
-					,re.getString(11),re.getInt(12),re.getDate(13),re.getInt(14));
-			petlist.add(pet);
+			System.out.format("%5s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s\n",
+					re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getDate(5),
+					re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
+					re.getString(11),re.getInt(12),re.getDate(13),re.getInt(14));
 		}	
-		return petlist;	
+		
 	}
 
 	// My pet details for customer

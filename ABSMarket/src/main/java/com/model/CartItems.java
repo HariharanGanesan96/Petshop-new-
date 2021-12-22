@@ -85,6 +85,15 @@ public class CartItems {
 		this.unitPrice = unitPrice;
 		this.totalPrice=totalprice;
 	}
+	public CartItems(int itemId, int petId, int customerId, int quantity, double unitPrice, double totalPrice) {
+		super();
+		this.itemId = itemId;
+		this.petId = petId;
+		this.customerId = customerId;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.totalPrice = totalPrice;
+	}
 	
 	
 	
