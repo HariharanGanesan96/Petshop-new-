@@ -1,6 +1,6 @@
 package com.model;
 
-import java.util.Objects;
+
 
 public class CartItems {
 	private int itemId;
@@ -45,10 +45,8 @@ public class CartItems {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(petId, customerId, itemId, quantity, totalPrice, unitPrice);
-	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -16,7 +16,9 @@ public class CartItemsDao {
 	       // To get Connection from connection util
 	       Connectionutil obj = new Connectionutil();
 	       PreparedStatement pstmt =null;
-	       public void insert(CartItems cartit) {		
+	   
+	       
+	    public void insert(CartItems cartit) {		
 		Connection con;
 	
 		try {
@@ -38,37 +40,60 @@ public class CartItemsDao {
 		}	
 	}
 
-	// To update order qtr
-	public void update(CartItems cartit) throws SQLException, ClassNotFoundException {
-		Connectionutil obj = new Connectionutil();
-		Connection con = obj.getDbConnect();
+	// To update order qty
+	public void updateQty(int itemId,int qty){
+		
+		
 		String query = "update Cart_items set Quantity=? where item_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1, cartit.getQuantity());
-		pstmt.setInt(2, cartit.getItemId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
+		PreparedStatement pstmt;
+		try {
+			Connection con = obj.getDbConnect();
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, qty);
+			pstmt.setInt(2, itemId);
+			System.out.println(pstmt.executeUpdate() + " rows updated");
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	public void delete(int itemId) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "delete from cart_items where item_id="+itemId+"";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		System.out.println(pstmt.executeUpdate() + " rows deleted");
+	public void delete(int itemId) {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "delete from cart_items where item_id="+itemId+"";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			System.out.println(pstmt.executeUpdate() + " rows deleted");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	
-	public List<CartItems> show(Customers cus) throws SQLException, ClassNotFoundException {
-		
-		Connection con = obj.getDbConnect();
+	public List<CartItems> show(Customers cus)  {	
+		Connection con;
 		List<CartItems> cartList= new ArrayList<CartItems>();
-		CartItems cartItem=null;
-		String query = "select * from cart_items where customer_id='"+cus.getCustomerId()+"'";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		ResultSet re = pstmt.executeQuery();
-		while (re.next()) {
-			cartItem=new CartItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
-		cartList.add(cartItem);
+		try {
+			con = obj.getDbConnect();
+			CartItems cartItem=null;
+			String query = "select * from cart_items where customer_id='"+cus.getCustomerId()+"'";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			ResultSet re = pstmt.executeQuery(); 
+			while (re.next()) {
+				cartItem=new CartItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
+			cartList.add(cartItem);
+			}
+			 
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-      return cartList;
+		return cartList;
 	}
+
+	
 }

@@ -12,17 +12,18 @@ public class CustomerMain {
 
 	public void customer(Customers customer) throws ClassNotFoundException, SQLException, ParseException {
 
-		// customer dao created for to access the methods
+	
 		CustomerDao cusDao = new CustomerDao();
-		// scanner used for to get values
 		Scanner scan = new Scanner(System.in);
+		String choice="";
 		
-		// information purpose
+		do {
 		System.out.println("1.Update Firstname\n" + "2.update Lastname\n" + "3.update username\n" + "4.update password\n"
 					     + "5.update email\n" + "6.update mobilenumber\n" + "7.update bank\n" + "8.update address\n"
-						 + "9.update pincode\n" + "10.update city\n" + "11.update image\n" + "12.Update bank and address"+"13.product realted option");
+						 + "9.update pincode\n" + "10.update city\n" + "11.update image\n" + "12.Update bank and address\n13.back");
 		
 		int userOperation = Integer.parseInt(scan.nextLine());
+		int back =0;
 		switch (userOperation) {
 
 		// update first name
@@ -35,12 +36,13 @@ public class CustomerMain {
 					break;
 				}
 				if (firstName.length() <= 2) {
-					System.out.println("first name must have minimum 3 character");
+					System.out.println("Minimum have 3 character");
 				} else if (firstName.matches(".*\\W.*") || firstName.matches(".*\\d.*")) {
-					System.out.println("name contains alphabet only");
+					System.out.println("Accept alphabet only");
 				}
 			}
-			cusDao.updateFirstName(customer.getCustomerId(), firstName);
+			customer.setFirstName(firstName);
+			cusDao.updateFirstName(customer);
 			break;
 		// update last name
 		case 2:
@@ -52,9 +54,9 @@ public class CustomerMain {
 					break;
 				}
 				if (lastName.length() <= 2) {
-					System.out.println("last name must have minimum 3 character");
+					System.out.println("Minimum have 3 character");
 				} else if (lastName.matches(".*\\W.*") || lastName.matches(".*\\d.*")) {
-					System.out.println("name contains alphabet only");
+					System.out.println("Accept alphabet only");
 				}
 			}
 			cusDao.updateLastName(customer.getCustomerId(), lastName);
@@ -71,9 +73,9 @@ public class CustomerMain {
 				} else if (userName.matches("[a-zA-Z0-9]{8,20}")) {
 					break;
 				} else if (userName.length() <= 7) {
-					System.out.println("username must be minimum 8 character or more");
+					System.out.println("Minimum 8 character or more");
 				} else {
-					System.out.println("Don't use special for username");
+					System.out.println("special Character not allowed ");
 				}
 			}
 			cusDao.updateUserName(customer.getCustomerId(), userName);
@@ -88,7 +90,7 @@ public class CustomerMain {
 				if (passWord.matches("[a-zA-Z0-9!@#$%^&*()_+]{8,20}")) {
 					break;
 				}
-				System.out.println("password nust be in 8 charcter or more");
+				System.out.println("Must have  8 character or more");
 			}
 			cusDao.updatePassword(customer.getCustomerId(), passWord);
 			break;
@@ -120,11 +122,11 @@ public class CustomerMain {
 				if (mobileNumber.matches("[6-9][0-9]{9}")) {
 					break;
 				} else if (mobileNumber.matches("[0-5]")) {
-					System.out.println("mobile number must be start with 6 or above");
+					System.out.println("number should be start with 6 or above");
 				} else if (mobileNumber.matches(".*\\D.*")) {
 					System.out.println("Accept number only");
 				} else {
-					System.out.println("length must be in 10 character");
+					System.out.println("length must be 10 character");
 				}
 
 			}
@@ -143,7 +145,7 @@ public class CustomerMain {
 				} else if (bank.matches(".*\\D.*")) {
 					System.out.println("Accept number only");
 				} else {
-					System.out.println("length must be in 8 character");
+					System.out.println("length must be 8 character or more");
 				}
 
 			}
@@ -169,10 +171,10 @@ public class CustomerMain {
 			while (true) {
 				System.out.println("enter the pincode");
 				pincode = scan.nextLine();
-				if (pincode.matches("[0-9]{6}")) {
+				if (pincode.matches("[6][0-9]+{6}")) {
 					break;
 				} else {
-					System.out.println("pincode atlest 6 digits");
+					System.out.println("lenth should be 6");
 				}
 			}
 			cusDao.updatePincode(customer.getCustomerId(), Integer.parseInt(pincode));
@@ -188,9 +190,9 @@ public class CustomerMain {
 					break;
 				}
 				if (city.length() <= 2) {
-					System.out.println("city must have minimum 3 character");
+					System.out.println("Minimum 3 character or more");
 				} else if (city.matches(".*\\W.*") || city.matches(".*\\d.*")) {
-					System.out.println("city name contains alphabet only");
+					System.out.println("Accept alphabet only");
 				}
 			}
 			cusDao.updateCity(customer.getCustomerId(), city);
@@ -199,7 +201,7 @@ public class CustomerMain {
 		// update image
 		case 11:
 			String image;
-			System.out.println("enter the city");
+			System.out.println("Give the image link");
 			image = scan.nextLine();
 			cusDao.updateImage(customer.getCustomerId(), image);
 			break;
@@ -220,14 +222,15 @@ public class CustomerMain {
 			CustomerDao cusdaoup = new CustomerDao();
 			cusdaoup.update(cusupdate);
 			break;
-
-
-	  // to perform pet related operation
 		case 13:
-			PetMain petmain = new PetMain();
-			petmain.petDetils(customer);
+			back++;
 			break;
 		}
-
+		if(back==1) {
+			break;
+		}
+		System.out.println("do you want continue yes/no");
+		choice=scan.nextLine().toLowerCase();
+		}while(choice.equals("yes"));
 	}
 }

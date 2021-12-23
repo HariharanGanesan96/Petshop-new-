@@ -160,44 +160,6 @@ public class PetDetails {
 			this.avilableQty=availableQty;
 		}
 	
-	// show my pet details for customer
-	public PetDetails(int petId, String petType, String petName, String petGender, Date petDob, 
-			String description,String petColor,int petQty,  double petprice, String petImage, String status, Date regDate,int availableQty) {
-		super();
-		this.petId = petId;
-		this.petType = petType;
-		this.petName = petName;
-		this.petGender = petGender;
-		this.petDob = petDob;
-		this.petQty = petQty;
-		this.description = description;
-		this.petColor = petColor;
-		this.petprice = petprice;
-		this.petImage = petImage;
-		this.status = status;
-		this.regDate = regDate;
-		this.avilableQty=availableQty;
-	}
-		
-	// used to show pet list for admin
-	public PetDetails(int petId, String petType, String petName, String petGender, Date petDob,String description, 
-			 String petColor, int petQty,double petprice, String petImage, String status, int customerId, Date regDate,int availableQty) {
-		super();
-		this.petId = petId;
-		this.petType = petType;
-		this.petName = petName;
-		this.petGender = petGender;
-		this.petDob = petDob;
-		this.petQty = petQty;
-		this.description = description;
-		this.petColor = petColor;
-		this.petprice = petprice;
-		this.petImage = petImage;
-		this.status = status;
-		this.customerId = customerId;
-		this.regDate = regDate;
-		this.avilableQty=availableQty;
-	}
 	
 	// used to store all the information
 	public PetDetails(int petId, String petType, String petName, String petGender, Date petDob, int petQty,

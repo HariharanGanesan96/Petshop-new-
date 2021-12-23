@@ -22,16 +22,19 @@ public class PetMain {
 
 	public void petDetils(Customers customer) throws ClassNotFoundException, SQLException, ParseException {
 		
-		// scanner used for get input from user
 		Scanner scan = new Scanner(System.in);
-		// pet dao created for access the methods from that class
 		PetDao petDao = new PetDao();
+	    int back=0;
+	    String choice=null;
+	    do {
 		// for information purpose 
 		System.out.println("select you option");
 		System.out.println(
-				"1.Register new pet\n2.update my pet detilas\n3.order\n5.myorders\n4.add to cart item\n6.show cart item\n7.delete cartitem");
+				"1.Register new pet\n"
+				+ "2.update my pet detilas\n"
+				+ "3.back");
 		int PetOperation = Integer.parseInt(scan.nextLine());
-
+    
 		switch (PetOperation) {
 		
 		// animal register
@@ -46,7 +49,7 @@ public class PetMain {
 					break;
 				}
 				if (petType.length() <= 2) {
-					System.out.println("Must have minimum 3 character");
+					System.out.println("Minimum 3 character or more");
 				} else if (petType.matches(".*\\W.*") || petType.matches(".*\\d.*")) {
 					System.out.println("Alphabet only");
 				}
@@ -61,7 +64,7 @@ public class PetMain {
 					break;
 				}
 				if (petName.length() <= 2) {
-					System.out.println("Must have minimum 3 character");
+					System.out.println("Minimum 3 character or more");
 				} else if (petName.matches(".*\\W.*") || petName.matches(".*\\d.*")) {
 					System.out.println("Alphabet only");
 				}
@@ -94,11 +97,13 @@ public class PetMain {
 				if (Description.length() <= 30) {
 					System.out.println("minmum 30 character");
 				}
-
+				else {
+					break;
+				}
+			}
 				// color
 				String petColor;
 				while (true) {
-
 					System.out.println("enter the color");
 					petColor = scan.nextLine();
 					if (petColor.matches("[a-zA-z]+")) {
@@ -110,13 +115,29 @@ public class PetMain {
 
 				// pet Qty
 				String petQty;
+				while(true) {
 				System.out.println("enter the quantity");
 				petQty = scan.nextLine();
-			
+				if(petQty.matches(".*\\W.*") || petQty.matches(".*\\D.*")) {
+					System.out.println("invalid number");
+				}
+				else {
+					break;
+				}
+				}
+				
 				// pet price
 				String petPrice;
+				while(true) {
 				System.out.println("enter the pet price");
 				petPrice = scan.nextLine();
+				if(petPrice.matches(".*\\W.*") || petPrice.matches(".*\\D.*")) {
+					System.out.println("invalid number");
+				}
+				else {
+					break;
+				}
+				}
 
 				// pet Image
 				String petImage;
@@ -129,26 +150,18 @@ public class PetMain {
 						Integer.parseInt(petQty));
 
 				petDao.insert(pet);
-
+		
 				break;
-			}
+			
 		
 		// to my pet details and update
 		case 2:
-			// list created for to display the values
-			List<PetDetails> petList = new ArrayList<PetDetails>();
-			petList = petDao.showMypetdetails(customer.getCustomerId());
 			
-			// To print my pet Details
-			for (PetDetails i : petList) {
-				System.out.println(i);
-			}
-			
+			petDao.showMypetdetails(customer.getCustomerId());	
 			// used to store the values
-			PetDetails pet = new PetDetails();
+			pet = new PetDetails();
 			
 			// asking id for updating 
-			
 			System.out.println("enter pet id value need to update");
 			int update = Integer.parseInt(scan.nextLine());
 			pet.setCustomerId(update);
@@ -229,17 +242,33 @@ public class PetMain {
 			
 			// pet qty
 			case 5:
+				while(true) {
 				System.out.println("enter the quantity");
-				int petQty = Integer.parseInt(scan.nextLine());
-				pet.setPetQty(petQty);
+				petQty = scan.nextLine();
+				if(petQty.matches(".*\\W.*") || petQty.matches(".*\\D.*")) {
+					System.out.println("invalid number");
+				}
+				else {
+					break;
+				}
+				}
+				pet.setPetQty(Integer.parseInt(petQty));
 				petDao.updatePetQty(pet);
 				break;
             
 			// pet price
 			case 6:
-				System.out.println("enter the pet price");
-				double petPrice = Double.parseDouble(scan.nextLine());
-				pet.setPetprice(petPrice);
+				while(true) {
+					System.out.println("enter the pet price");
+					 petPrice = scan.nextLine();
+					if(petPrice.matches(".*\\W.*") || petPrice.matches(".*\\D.*")) {
+						System.out.println("invalid number");
+					}
+					else {
+						break;
+					}
+					}
+				pet.setPetprice(Double.parseDouble(petPrice));
 				petDao.updatePetPrice(pet);
 				break;
 			
@@ -261,7 +290,6 @@ public class PetMain {
 			
 			// update color
 			case 8:
-				String petColor;
 				while (true) {
 					System.out.println("enter the color");
 					petColor = scan.nextLine();
@@ -278,7 +306,7 @@ public class PetMain {
 			// update Image
 			case 9:
 				System.out.println("enter link address of image");
-				String petImage = scan.nextLine();
+				petImage = scan.nextLine();
 				pet.setPetImage(petImage);
 				petDao.updatePetPrice(pet);
 				break;
@@ -289,139 +317,17 @@ public class PetMain {
 				petDao.delete(pet);
 			}
 		break;
-		
-		// to order items
 		case 3:
-			
-			// to show all the pets except own user
-			petList = new ArrayList<PetDetails>();
-			petList = petDao.showAllpets();
-			for (PetDetails i : petList) {
-				System.out.println(i);
-			}
-			
-			// order and orderitems dao object created for to acess methods
-			OrdersDao ordersDao = new OrdersDao();
-			OrderItemsDao orderItemsDao = new OrderItemsDao();
-			
-			// list is used to store temporary orderitems data
-			List<OrderItems> itemlist = new ArrayList<OrderItems>();
-			String choice = null;
-			
-			// Asking for add items
-			double sum = 0;
-			do {
-				System.out.println("enter pet id need to order");
-				int petId = Integer.parseInt(scan.nextLine());
-				PetDetails petdetails = petDao.showPet(petId);
-				System.out.println("enter the quantity");
-				int qty = Integer.parseInt(scan.nextLine());
-				
-				// checking for qty matching
-				if (petdetails.getAvilableQty() < qty) {
-					System.out.println("invalid quantity");	
-				} 
-				// if quantity matched its do update operation
-				else {
-					petdetails.setAvilableQty((petdetails.getAvilableQty()) - qty);
-					petDao.updatePetAviQty(petdetails);
-					
-				// store the values in list
-					OrderItems ordersItem = new OrderItems(petId, qty, petdetails.getPetprice(),
-							(qty * petdetails.getPetprice()));
-					itemlist.add(ordersItem);
-					sum += qty * petdetails.getPetprice();
-				}
-				System.out.println("do you want Continue yes/no");
-				choice = scan.nextLine();
-			} while (choice.equals("yes"));
-            
-			// insert the values in order items
-			Orders order = new Orders(customer.getCustomerId(), sum);
-			ordersDao.insert(order);
-			
-			//insert the value in orderitems
-			int orderId = ordersDao.orderId();
-			for (OrderItems i : itemlist) {
-				i.setOrderId(orderId);
-				orderItemsDao.insert(i);
-			}
-			System.out.println("do you want delete a order or ");
-			
+			back++;
 			break;
 		
-		// to add item into carts
-		case 4:
-		
-		// to show all values
-			petList = new ArrayList<PetDetails>();
-			petList = petDao.showAllpets();
-			for (PetDetails i : petList) {
-				System.out.println(i);
-			}
-			
-			// cartitems dao created for to access metods
-			CartItemsDao cartItemsDao = new CartItemsDao();
-			choice = null;
-			
-			
-			double totalPrice = 0;
-			do {
-				System.out.println("enter pet id to add cart");
-				int petId = Integer.parseInt(scan.nextLine());
-				PetDetails petdetails = petDao.showPet(petId);
-				System.out.println("enter the quantity");
-				int qty = Integer.parseInt(scan.nextLine());
-				
-				
-				if (petdetails.getAvilableQty() < qty) {
-					System.out.println("invalid quantity");
-				} 
-				
-				else {
-					petdetails.setAvilableQty((petdetails.getAvilableQty()) - qty);
-					petDao.updatePetAviQty(petdetails);
-					CartItems cartItem = new CartItems(petId, customer.getCustomerId(), qty, petdetails.getPetprice(),
-							(qty * petdetails.getPetprice()));
-
-					totalPrice += qty * petdetails.getPetprice();
-					cartItemsDao.insert(cartItem);
-				}
-				System.out.println("do you want Continue yes/no");
-				choice = scan.nextLine();
-			} while (choice.equals("yes"));
-
-			break;
-		// show my order items
-		case 5:
-			List<OrderItems> orderList = new ArrayList<OrderItems>();
-			orderItemsDao = new OrderItemsDao();
-			orderList = orderItemsDao.showMyOrders(customer);
-			for (OrderItems o : orderList) {
-				System.out.println(o);
-			}
-			break;
-		// show my cart items
-		case 6:
-			List<CartItems> cartList = new ArrayList<CartItems>();
-			cartItemsDao = new CartItemsDao();
-			cartList = cartItemsDao.show(customer);
-			for (CartItems c : cartList) {
-				System.out.println(c);
-			}
-			System.out.println("do you want delete item yes/no");
-			String deleteChoice = scan.nextLine().toLowerCase();
-			while (deleteChoice.equals("yes")) {
-				System.out.println("enter the item id for delete");
-				int itemId = Integer.parseInt(scan.nextLine());
-				cartItemsDao.delete(itemId);
-				System.out.println("do you want delete item yes/no");
-				deleteChoice = scan.nextLine().toLowerCase();
-			}
-
-			break;
-
 		}
+		if(back==1) {
+			break;
+		}
+		System.out.println("do you want continue yes/no");
+		choice=scan.nextLine();
+	    }while(choice.equals("yes"));
 
 	}
 

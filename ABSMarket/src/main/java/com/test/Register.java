@@ -20,22 +20,18 @@ public class Register {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 
 		Scanner scan = new Scanner(System.in);
-
+		CustomerDao cusDao = new CustomerDao();
+		AdminDao adminDao = new AdminDao();
+		Customers customer = new Customers();
 		// Asking for operation
 		System.out.println("Enter the operation");
-		System.out.println("1.register\n" 
-		                  + "2.login validation\n" +
-				            "3.bank and address updataion\n");
+		System.out.println("1.register\n2.login validation\n");
+		
 		int operation = Integer.parseInt(scan.nextLine());
 
-		// customersdao created for calling customerdao methods
-		CustomerDao cusDao = new CustomerDao();
-
 		switch (operation) {
-
 		// Register operation
 		case 1:
-			cusDao = new CustomerDao();
 			String[] input = new String[7];
 
 			// Input first name
@@ -46,9 +42,9 @@ public class Register {
 					break;
 				}
 				if (input[0].length() <= 2) {
-					System.out.println("first name must have minimum 3 character");
+					System.out.println("Must have minimum 3 character");
 				} else if (input[0].matches(".*\\W.*") || input[0].matches(".*\\d.*")) {
-					System.out.println("name contains alphabet only");
+					System.out.println("Alphabet only");
 				}
 			}
 
@@ -60,9 +56,9 @@ public class Register {
 					break;
 				}
 				if (input[1].length() <= 2) {
-					System.out.println("lastname must have minimum 3 character");
+					System.out.println("Must have minimum 3 character");
 				} else if (input[1].matches(".*\\W.*") || input[1].matches(".*\\d.*")) {
-					System.out.println("name contains alphabet only");
+					System.out.println("Alphabet only");
 				}
 
 			}
@@ -71,14 +67,15 @@ public class Register {
 			while (true) {
 				System.out.println("enter the user name");
 				input[2] = scan.nextLine();
+				
 				if (cusDao.ValidatUsername(input[2])) {
 					System.out.println("user name not available");
 				} else if (input[2].matches("[a-zA-Z0-9]{8,20}")) {
 					break;
 				} else if (input[2].length() <= 7) {
-					System.out.println("username must be minimum 8 character or more");
+					System.out.println("Must have 8 character or more");
 				} else {
-					System.out.println("Don't use special for username");
+					System.out.println("special character not allowed");
 				}
 			}
 
@@ -89,7 +86,7 @@ public class Register {
 				if (input[3].matches("[a-zA-Z0-9!@#$%^&*()_+]{8,20}")) {
 					break;
 				}
-				System.out.println("password nust be in 8 charcter or more");
+				System.out.println("Minimum 8 characters");
 			}
 
 			// input email
@@ -105,7 +102,7 @@ public class Register {
 				}
 			}
 
-			// input mobile number
+			// input mobile number  
 			while (true) {
 
 				System.out.println("enter the mobile number");
@@ -113,7 +110,7 @@ public class Register {
 				if (input[5].matches("[6-9][0-9]{9}")) {
 					break;
 				} else if (input[5].matches("[0-5]")) {
-					System.out.println("mobile numst be start with 6 or above");
+					System.out.println("Number should start with 6 or above");
 				} else if (input[5].matches(".*\\D.*")) {
 					System.out.println("Accept number only");
 				} else {
@@ -135,24 +132,23 @@ public class Register {
 			Customers cus = new Customers(input[0], input[1], input[2], input[3], input[4], Long.parseLong(input[5]),
 					input[6]);
 			cusDao.insert(cus);
-			break;
+			
 
 		// Login validation
 		case 2:
-			cusDao = new CustomerDao();
-			String username = "";
+			String userName = "";
 			String password = "";
 
 			// user name input
 			while (true) {
 				System.out.println("enter the username");
-				username = scan.nextLine();
-				if (username.matches("[a-zA-Z0-9]{8,20}")) {
+				userName = scan.nextLine();
+				if (userName.matches("[a-zA-Z0-9]{8,20}")) {
 					break;
-				} else if (username.length() <= 7) {
-					System.out.println("username must be minimum 8 character or more");
+				} else if (userName.length() <= 7) {
+					System.out.println("Must have 8 character or more");
 				} else {
-					System.out.println("special character username");
+					System.out.println("special character not allowed");
 				}
 			}
 
@@ -166,36 +162,58 @@ public class Register {
 				System.out.println("invalid password");
 			}
 
-			// store the values for execution
-			Customers cusvalidate = new Customers(username, password);
+			// userName validation 
+			Customers cusValidate = new Customers(userName, password);
+			String valData = cusDao.cusValidation(cusValidate);
 
-			// validate user name password
-			String valdata = cusDao.cusValidation(cusvalidate);
-
-			// check whether its user or admin
-			if (valdata != null) {
-				String name = valdata.substring(1);
+			// Checking user is avilable or not
+			if (valData != null) {
+				String name = valData.substring(1);
 				// customer login
-				if (valdata.charAt(0) == '1') {
+				if (valData.charAt(0) == '1') {
 					System.out.println("welcome user: " + name);
-					Customers customer = new Customers();
-					customer = cusDao.customerDetails(username);
+					customer = cusDao.customerDetails(userName);
 					System.out.println(customer);
+					String choice=null;
+				do {
+				System.out.println("select operation");
+				System.out.println("1.Profile updation\n2.Product options\n3.order operation\n4:cart operation");
+				operation=Integer.parseInt(scan.nextLine());
+				switch(operation) {
+				case 1:
 					CustomerMain customermain = new CustomerMain();
 					customermain.customer(customer);
+					break;
+				case 2:
+					 // to perform pet related operation
+					PetMain petmain = new PetMain();
+					petmain.petDetils(customer);
+					break;
+				case 3:
+					// to order items
+					OrderMain orderMain=new OrderMain();
+					orderMain.orderMain(customer);
+		            break;
+				case 4:
+					CartMain cartmain=new CartMain();
+					cartmain.cartmain(customer);
+					break;
+				}
+				System.out.println("do yo want continue yes/no");
+				choice=scan.nextLine();
+				}while(choice.equals("yes"));
 				}
 
 				// admin user login
 				else {
-					System.out.println("welcome Admin: " + username);
-
-					AdminDao adminDao = new AdminDao();
-					Admin admin = adminDao.show(username);
+					System.out.println("welcome Admin: " + userName);
+					Admin admin = adminDao.show(userName);
 					System.out.println(admin);
-					AdminMain adminmain = new AdminMain();
-					adminmain.adminMain(admin);
+					AdminMain adminMain = new AdminMain();
+					adminMain.adminMain(admin);
 				}
-			} else {
+			} 
+			else {
 				System.out.println("invalid user name or password");
 			}
 			break;
