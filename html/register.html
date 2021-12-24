@@ -11,20 +11,17 @@
             padding: 0;
         }
         #background{
-            background: url("https://images.pexels.com/photos/4426354/pexels-photo-4426354.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-            background-repeat: no-repeat;
-            background-size: cover;
             height: 100vh;
+            background-color: rgb(207, 202, 193);
         }
         .registerform{
-            border: none;
-            border-radius: 15px;
+            border-radius: 5px;
             width: 400px;
-            height: 480px;
+            height: 520px;
             position: absolute;
-            left: 65%;
-            top: 10%;
-            background-color:  rgba(224, 224, 224, 0.986);
+            left: 35%;
+            top: 8%;
+            background-color: rgb(207, 202, 193);
         }
         #registername{
             font-size: 25px;
@@ -43,24 +40,22 @@
             height: 30px;
             width: 120px;
             border: none;
-            border: 1PX solid rgb(72, 224, 52);
-            border-radius: 5px;
-            background-color: rgb(72, 224, 52);
-            color: white;
             font-weight: bolder;
             font-size: 15px;
+            border: 1px solid;
+            border-color: rgb(138, 136, 136);
         }
         table input{
             height: 25px;
             width: 200px;
             border: 1px solid;
             padding-left: 10px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
             border-color: rgb(148, 145, 145);
             background-color: transparent;
             font-size: 15px;
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 0 3px;
         }
         table input:focus{
         outline: none;
@@ -94,6 +89,10 @@
                     <td><input type="text" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required></td>
                 </tr>
                 <tr>
+                    <td><label for="Gendr">Gender <span>*</span></label></td>
+                    <td><input type="text" name="gender" id="genderinput" pattern="[a-zA-Z]{3,10}" title="Name contains only letter" placeholder="Gender" list="genderlist" required></td>
+                </tr>
+                <tr>
                      <td><label for="username">UserName <span>*</span></label></td>
                      <td><input type="text" name="username" id="usernameinput" placeholder="username" pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required></td>
                 </tr>
@@ -103,7 +102,7 @@
                 </tr>
                 <tr>
                     <td><label for="repassword">Re-Password<span>*</span></label></td>
-                    <td><input type="password"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required></td>
+                    <td><input type="password" onpointerleave="checkPassword"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required></td>
                 </tr>
                 <tr>
                     <td><label for="mobile">Mobile Number<span>*</span></label></td>
@@ -115,10 +114,15 @@
                 </tr>
                 <tr>
                     <td><button type="submit" id="register">Register</button></td>
-                    <td><button type="reset" id="reset">Reset</button></td>
+                    <td></td>
                 </tr>
             </thead>
-        </table>      
+        </table>   
+        <datalist id="genderlist">
+            <option value="Male"></option>
+            <option value="Female"></option>
+            <option value="Others"></option>
+        </datalist>   
     </form>
 </div>
 </body>

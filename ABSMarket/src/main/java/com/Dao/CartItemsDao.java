@@ -10,8 +10,9 @@ import java.util.List;
 import com.model.CartItems;
 import com.model.Customers;
 import com.model.OrderItems;
+import com.petinterface.CartItemsInterface;
 
-public class CartItemsDao {
+public class CartItemsDao implements CartItemsInterface {
 	
 	       // To get Connection from connection util
 	       Connectionutil obj = new Connectionutil();
@@ -41,9 +42,7 @@ public class CartItemsDao {
 	}
 
 	// To update order qty
-	public void updateQty(int itemId,int qty){
-		
-		
+	public void updateQty(int itemId,int qty){		
 		String query = "update Cart_items set Quantity=? where item_id=?";
 		PreparedStatement pstmt;
 		try {

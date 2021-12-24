@@ -10,10 +10,13 @@ import java.util.List;
 import com.model.CartItems;
 import com.model.Customers;
 import com.model.OrderItems;
+import com.model.Orders;
+import com.petinterface.OrderItemsInterface;
+import com.petinterface.Ordersinterface;
 
 
 
-public class OrderItemsDao {
+public class OrderItemsDao implements OrderItemsInterface {
 	
 	Connectionutil obj = new Connectionutil();
 	public void insert(OrderItems orditm) {
@@ -37,28 +40,12 @@ public class OrderItemsDao {
 		
 	}
 
-	public void update(OrderItems orditm) {
-		Connectionutil obj = new Connectionutil();
-		Connection con;
-		try {
-			con = obj.getDbConnect();
-			String query = "update animals_orderitems set Quantity=? where item_id=?";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, orditm.getQuantity());
-			pstmt.setInt(2, orditm.getOrderId());
-			System.out.println(pstmt.executeUpdate() + " rows updated");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
+	
 	public void delete(OrderItems ord) {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
-			String query = "delete from Animals_orderitems where item_id=?";
+			String query = "delete from order_items where item_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, ord.getOrderId());
 			System.out.println(pstmt.executeUpdate() + " rows deleted");
@@ -66,9 +53,7 @@ public class OrderItemsDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-
 	public void showMyOrders(Customers cus)  {
 		Connection con;
 		try {
@@ -86,10 +71,8 @@ public class OrderItemsDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
-
 	public List<OrderItems> getCurrentOrder(int orderId){
 		// TODO Auto-generated method stub
 		List<OrderItems> updateList=new ArrayList<OrderItems>();
@@ -109,6 +92,5 @@ public class OrderItemsDao {
 			e.printStackTrace();
 		}
 		return updateList;
-			}
-	
+			}	
 }

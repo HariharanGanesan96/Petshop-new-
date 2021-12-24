@@ -11,13 +11,14 @@ import java.util.Scanner;
 import com.dao.AdminDao;
 import com.dao.CustomerDao;
 import com.dao.PetDao;
+import com.exception.QtyNotAvalilable;
 import com.model.Admin;
 import com.model.Customers;
 import com.model.PetDetails;
 
 public class Register {
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException, QtyNotAvalilable {
 
 		Scanner scan = new Scanner(System.in);
 		CustomerDao cusDao = new CustomerDao();

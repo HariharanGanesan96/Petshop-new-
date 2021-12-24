@@ -9,25 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.PetDetails;
-public class PetDao {
+import com.petinterface.PetInterface;
+public class PetDao implements PetInterface{
               
 	   SimpleDateFormat formeter=new SimpleDateFormat("dd-mm-yyyy");
 	   Connectionutil obj = new Connectionutil();
 	 // insert operation from user
 	public void insert(PetDetails pet) {
-
 		Connection con;
 		try {
 			con = obj.getDbConnect();
 			String query = "INSERT into pet_details(pet_type,pet_name,pet_gender,pet_dob,pet_Qty,pet_description,\r\n"
-					+ "pet_color,pet_price,pet_image,customer_id,available_qty) values(?,?,?,?,?,?,?,?,?,?,?)";
-					
+					+ "pet_color,pet_price,pet_image,customer_id,available_qty) values(?,?,?,?,?,?,?,?,?,?,?)";					
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pet.getPetType());
 			pstmt.setString(2, pet.getPetName());
 			pstmt.setString(3, pet.getPetGender());
 			String dob=formeter.format(pet.getPetDob());
-			System.out.println(dob);
 			pstmt.setString (4, dob);
 			pstmt.setInt(5, pet.getPetQty());
 			pstmt.setString(6, pet.getDescription());
@@ -41,7 +39,37 @@ public class PetDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void update(PetDetails pet) {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "update pet_details set pet_type=?,pet_name=?,"
+					+ "pet_gender=?,pet_dob=?,pet_Qty=?,pet_description=?,"
+					+ "pet_color=?,pet_price=?,pet_image=?,customer_id=?,"
+					+ "available_qty=? where pet_id=?";
+			
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, pet.getPetType());
+			pstmt.setString(2, pet.getPetName());
+			pstmt.setString(3, pet.getPetGender());
+			String dob=formeter.format(pet.getPetDob());
+			pstmt.setString(4, dob);
+			pstmt.setInt(5, pet.getPetQty());
+			pstmt.setString(6, pet.getDescription());
+			pstmt.setString(7, pet.getPetColor());
+			pstmt.setDouble(8, pet.getPetprice());
+			pstmt.setString(9, pet.getPetImage());
+			pstmt.setInt(10, pet.getCustomerId());
+			pstmt.setInt(11, pet.getPetQty());
+			pstmt.setInt(12, pet.getPetId());
+			
+			System.out.println(pstmt.executeUpdate()+ " rows updated");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
      
 	// To update pet Status
@@ -55,22 +83,6 @@ public class PetDao {
 			pstmt.setInt(2, adminId);
 			pstmt.setInt(3, petId);
 			System.out.println(pstmt.executeUpdate()+ " rows updated");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-    
-	// To delete particular pet_details
-	public void delete(PetDetails pet) {
-		Connection con;
-		try {
-			con = obj.getDbConnect();
-			String query = "delete from pet_details where pet_id=?";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, pet.getPetId());
-			System.out.println(pstmt.executeUpdate() + " rows deleted");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,9 +155,7 @@ public class PetDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 
 	// My pet details for customer
@@ -171,114 +181,37 @@ public class PetDao {
 		
 	}
 	
-	
-	// To edit the Pet Type
-	public void updatePetType(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_type=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, pet.getPetType());
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	// To update pet Name
-	public void updatePetName(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_Name=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, pet.getPetName());
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	//To update pet gender
-	public void updatePetGender(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_Gender=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, pet.getPetGender());
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	//To update pet Dob
-	public void updatePetDob(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_Dob=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		String dob=formeter.format(pet.getPetDob());
-		pstmt.setString(1, dob);
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update pet Description
-	public void updatePetDescription(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_description=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setString(1,pet.getDescription() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update Pet Color
-	public void updatePetColor(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_color=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setString(1,pet.getPetColor() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update Pet Qty
-	public void updatePetQty(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_qty=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setInt(1,pet.getPetQty() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update Available quantity
-	public void updatePetAviQty(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set available_qty=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setInt(1,pet.getAvilableQty() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-    // To update the pet price
-	public void updatePetPrice(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_price=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setDouble(1,pet.getPetprice() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update Pet Image
-	public void updatePetImage(PetDetails pet) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set pet_Image=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setString(1,pet.getPetImage() );
-		pstmt.setInt(2, pet.getPetId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-	
-	// To update admin id
-	public void updateadmin(int adminId,int petId) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Pet_details set admin_id=? where pet_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);	
-		pstmt.setInt(1,adminId);
-		pstmt.setInt(2, petId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
+	// To delete particular pet_details
+		public void delete(PetDetails pet) {
+			Connection con;
+			try {
+				con = obj.getDbConnect();
+				String query = "delete from pet_details where pet_id=?";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, pet.getPetId());
+				System.out.println(pstmt.executeUpdate() + " rows deleted");
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 
-
-}
+	// update available qty
+	public void updatePetAviQty(PetDetails pet)  {
+			Connection con;
+			try {
+				con = obj.getDbConnect();
+				String query = "update Pet_details set available_qty=? where pet_id=?";
+				PreparedStatement pstmt = con.prepareStatement(query);	
+				pstmt.setInt(1,pet.getAvilableQty() );
+				pstmt.setInt(2, pet.getPetId());
+				System.out.println(pstmt.executeUpdate() + " rows updated");
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}

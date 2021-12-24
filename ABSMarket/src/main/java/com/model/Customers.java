@@ -11,7 +11,7 @@ public class Customers {
 	private String password;
 	private String email;
 	private long number;
-	private long bank;
+	private double wallet;
 	private Date regDate;
 	private String address;
 	private String city;
@@ -75,12 +75,12 @@ public class Customers {
 		this.number = number;
 	}
 
-	public long getBank() {
-		return bank;
+	public double getWallet() {
+		return wallet;
 	}
 
-	public void setBank(long bank) {
-		this.bank = bank;
+	public void setWallet(double wallet) {
+		this.wallet = wallet;
 	}
 
 	public Date getRegDate() {
@@ -138,7 +138,7 @@ public class Customers {
 	public String toString() {
 		return "Customers [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", userName=" + userName + ", password=" + password + ", email=" + email + ", number=" + number
-				+ ", bank=" + bank + ", regDate=" + regDate + ", address=" + address + ", city=" + city + ", pincode="
+				+ ", wallet=" + wallet + ", regDate=" + regDate + ", address=" + address + ", city=" + city + ", pincode="
 				+ pincode + ", gender=" + gender + ", image=" + image + "]";
 	}
 
@@ -153,10 +153,9 @@ public class Customers {
 		this.password = password;
 	}
 	
-	public Customers(int customerId, long bank, String address, String city, int pincode) {
+	public Customers(int customerId, String address, String city, int pincode) {
 		super();
 		this.customerId = customerId;
-		this.bank = bank;
 		this.address = address;
 		this.city = city;
 		this.pincode = pincode;
@@ -175,7 +174,7 @@ public class Customers {
 	}
 	
 	public Customers(int customerId, String firstName, String lastName, String gender, String userName, String password, String email,
-			long number, long bank, Date regDate, String address, int pincode, String image,String city) {
+			long number, double wallet, Date regDate, String address, int pincode, String image,String city) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
@@ -184,7 +183,7 @@ public class Customers {
 		this.password = password;
 		this.email = email;
 		this.number = number;
-		this.bank = bank;
+		this.wallet = wallet;
 		this.regDate = regDate;
 		this.address = address;
 		this.pincode = pincode;

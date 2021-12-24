@@ -12,7 +12,7 @@ public interface CartItemsInterface {
 	public void updateQty(int itemId,int qty);
 	
 	public void delete(int itemId);
-	
+		
 	public List<CartItems> show(Customers cus);
 		
 }

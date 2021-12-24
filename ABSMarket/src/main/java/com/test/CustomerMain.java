@@ -11,16 +11,15 @@ import com.model.Customers;
 public class CustomerMain {
 
 	public void customer(Customers customer) throws ClassNotFoundException, SQLException, ParseException {
-
 	
 		CustomerDao cusDao = new CustomerDao();
 		Scanner scan = new Scanner(System.in);
 		String choice="";
+		Customers updateCustomer=new Customers();
+		updateCustomer.setCustomerId(customer.getCustomerId());
 		
 		do {
-		System.out.println("1.Update Firstname\n" + "2.update Lastname\n" + "3.update username\n" + "4.update password\n"
-					     + "5.update email\n" + "6.update mobilenumber\n" + "7.update bank\n" + "8.update address\n"
-						 + "9.update pincode\n" + "10.update city\n" + "11.update image\n" + "12.Update bank and address\n13.back");
+		System.out.println("1.update profile\n" + "2.update wallet\n 3.address\n" + "4.update image\n" +"5.back");
 		
 		int userOperation = Integer.parseInt(scan.nextLine());
 		int back =0;
@@ -41,11 +40,9 @@ public class CustomerMain {
 					System.out.println("Accept alphabet only");
 				}
 			}
-			customer.setFirstName(firstName);
-			cusDao.updateFirstName(customer);
-			break;
+			updateCustomer.setFirstName(firstName);
+			
 		// update last name
-		case 2:
 			String lastName;
 			while (true) {
 				System.out.println("enter the last name");
@@ -59,11 +56,11 @@ public class CustomerMain {
 					System.out.println("Accept alphabet only");
 				}
 			}
-			cusDao.updateLastName(customer.getCustomerId(), lastName);
-			break;
+			updateCustomer.setLastName(lastName);
+			
 
 		// update user name
-		case 3:
+	
 			String userName;
 			while (true) {
 				System.out.println("enter the user name");
@@ -78,11 +75,9 @@ public class CustomerMain {
 					System.out.println("special Character not allowed ");
 				}
 			}
-			cusDao.updateUserName(customer.getCustomerId(), userName);
-			break;
+			updateCustomer.setUserName(userName);	
 		
 		// update password
-		case 4:
 			String passWord;
 			while (true) {
 				System.out.println("enter the password");
@@ -92,11 +87,10 @@ public class CustomerMain {
 				}
 				System.out.println("Must have  8 character or more");
 			}
-			cusDao.updatePassword(customer.getCustomerId(), passWord);
-			break;
+			updateCustomer.setPassword(passWord);
 
 		// update email
-		case 5:
+		
 			String email;
 			while (true) {
 				System.out.println("enter the email");
@@ -109,11 +103,9 @@ public class CustomerMain {
 					System.out.println("email should contains @ and .");
 				}
 			}
-			cusDao.updateEmail(customer.getCustomerId(), email);
-			break;
+			updateCustomer.setEmail(email);
 
 		// update mobile number
-		case 6:
 			String mobileNumber;
 			while (true) {
 
@@ -128,45 +120,57 @@ public class CustomerMain {
 				} else {
 					System.out.println("length must be 10 character");
 				}
-
 			}
-			cusDao.updateNumber(customer.getCustomerId(), Long.parseLong(mobileNumber));
+			
+			updateCustomer.setNumber(Long.parseLong(mobileNumber));
+			
+			//input gender
+		   String gender="";
+			while (true) {
+				System.out.println("male,female or others");
+				gender = scan.nextLine().toLowerCase();
+				if (gender.equals("male") || gender.equals("female") || gender.equals("others")) {
+					break;
+				}
+				System.out.println("invalid input");
+			}
+			updateCustomer.setGender(gender);
+			cusDao.update(updateCustomer);
+			
 			break;
-		
-		// update bank
-		case 7:
-			String bank;
+		 case 2:
+			// update bank
+			String wallet;
 			while (true) {
 
 				System.out.println("enter the bank number");
-				bank = scan.nextLine();
-				if (bank.matches("[0-9]{8,15}")) {
+				wallet = scan.nextLine();
+				if (wallet.matches("[0-9]+{1,15}")) {
 					break;
-				} else if (bank.matches(".*\\D.*")) {
+				} else if (wallet.matches(".*\\D.*")) {
 					System.out.println("Accept number only");
 				} else {
 					System.out.println("length must be 8 character or more");
 				}
 
 			}
-			cusDao.updateBank(customer.getCustomerId(), Long.parseLong(bank));
+			updateCustomer.setWallet(Double.parseDouble(wallet));
+			cusDao.updateWallet(updateCustomer);
+			
 			break;
-		
+		 case 3:
 		// update address
-		case 8:
 			String address;
 			while (true) {
 				System.out.println("enter the Address");
 				address = scan.nextLine();
-				if (address.matches("[a-zA-Z0-9,-/]{3,50}")) {
+				if (address.matches("[a-zA-Z0-9,-/ ]{3,50}")) {
 					break;
 				}
 			}
-			cusDao.updateAddress(customer.getCustomerId(), address);
-			break;
+			updateCustomer.setAddress(address);
 		
 		// update pincode
-		case 9:
 			String pincode;
 			while (true) {
 				System.out.println("enter the pincode");
@@ -177,11 +181,9 @@ public class CustomerMain {
 					System.out.println("lenth should be 6");
 				}
 			}
-			cusDao.updatePincode(customer.getCustomerId(), Integer.parseInt(pincode));
-			break;
+			updateCustomer.setPincode(Integer.parseInt(pincode));
 		
 		// update city
-		case 10:
 			String city;
 			while (true) {
 				System.out.println("enter the city");
@@ -195,34 +197,21 @@ public class CustomerMain {
 					System.out.println("Accept alphabet only");
 				}
 			}
-			cusDao.updateCity(customer.getCustomerId(), city);
+			updateCustomer.setCity(city);		
+			cusDao.updateAddressDetails(updateCustomer);
 			break;
 
 		// update image
-		case 11:
+		case 4:
 			String image;
 			System.out.println("Give the image link");
 			image = scan.nextLine();
-			cusDao.updateImage(customer.getCustomerId(), image);
+			updateCustomer.setImage(image);
+			cusDao.updateImage(updateCustomer);
 			break;
 			
 		// to update bank and address and pin code 	
-		case 12:
-			System.out.println("enter the bank account number");
-			long bankAccount = Long.parseLong(scan.nextLine());
-			System.out.println("enter the address");
-			 address = scan.nextLine();
-			System.out.println("enter the city");
-			 city = scan.nextLine();
-			System.out.println("enter the pincode");
-			int pincode1 = Integer.parseInt(scan.nextLine());
-			System.out.println("enter the customer_id");
-			int cusid = Integer.parseInt(scan.nextLine());
-			Customers cusupdate = new Customers(cusid, bankAccount, address, city, pincode1);
-			CustomerDao cusdaoup = new CustomerDao();
-			cusdaoup.update(cusupdate);
-			break;
-		case 13:
+		case 5:
 			back++;
 			break;
 		}

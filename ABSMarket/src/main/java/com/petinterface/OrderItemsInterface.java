@@ -8,9 +8,7 @@ import com.model.OrderItems;
 public interface OrderItemsInterface {
   
 	public void insert(OrderItems orditm);
-	
-	public void update(OrderItems orditm);
-	
+		
 	public void delete(OrderItems orditm);
 	
 	public void showMyOrders(Customers cus);

@@ -164,14 +164,13 @@ public class PetMain {
 			// asking id for updating 
 			System.out.println("enter pet id value need to update");
 			int update = Integer.parseInt(scan.nextLine());
-			pet.setCustomerId(update);
+			pet.setPetId(update);
+			pet.setCustomerId(customer.getCustomerId());
 			
 			// asking which value need to update
 			
 			System.out.println("enter the update operation");
-			System.out.println("1.Update pettype\n" + "2.update PetName\n" + "3.update petGender\n" + "4.update Dob\n"
-					+ "5.update qty\n" + "6.update price\n" + "7.update description\n" + "8.update color\n"
-					+ "9.update image\n10.delete");
+			System.out.println("1.Update petDetails\n2.delete");
 
 			int updateOperation = Integer.parseInt(scan.nextLine());
 
@@ -192,10 +191,8 @@ public class PetMain {
 					}
 				}
 				pet.setPetType(petType);
-				petDao.updatePetType(pet);
-				break;
+
 			// update petName
-			case 2:
 				while (true) {
 					System.out.println("enter the pet Name");
 					petName = scan.nextLine();
@@ -209,10 +206,8 @@ public class PetMain {
 					}
 				}
 				pet.setPetName(petName);
-				petDao.updatePetName(pet);
-				break;
+
 			// update Pet Gender
-			case 3:
 				while (true) {
 					System.out.println("enter the pet type");
 					petGender = scan.nextLine();
@@ -226,22 +221,17 @@ public class PetMain {
 					}
 				}
 				pet.setPetGender(petGender);
-				petDao.updatePetGender(pet);
-				break;
+				
 			// update pet DOB
-			case 4:
-
+				
 				dateFormet = new SimpleDateFormat("dd-mm-yyyy");
 				System.out.println("enter the Pet dob dd-mm-yyyy");
 				petDob = scan.nextLine();
 				date = dateFormet.parse(petDob);
 				pet.setPetDob(date);
-				petDao.updatePetDob(pet);
-
-				break;
-			
+							
 			// pet qty
-			case 5:
+		
 				while(true) {
 				System.out.println("enter the quantity");
 				petQty = scan.nextLine();
@@ -253,11 +243,9 @@ public class PetMain {
 				}
 				}
 				pet.setPetQty(Integer.parseInt(petQty));
-				petDao.updatePetQty(pet);
-				break;
-            
+				            
 			// pet price
-			case 6:
+			
 				while(true) {
 					System.out.println("enter the pet price");
 					 petPrice = scan.nextLine();
@@ -269,11 +257,10 @@ public class PetMain {
 					}
 					}
 				pet.setPetprice(Double.parseDouble(petPrice));
-				petDao.updatePetPrice(pet);
-				break;
+				
+			
 			
 			// update description
-			case 7:
 				while (true) {
 					System.out.println("enter the Description");
 					Description = scan.nextLine();
@@ -285,11 +272,10 @@ public class PetMain {
 
 				}
 				pet.setDescription(Description);
-				petDao.updatePetDescription(pet);
-				break;
+				
 			
 			// update color
-			case 8:
+		
 				while (true) {
 					System.out.println("enter the color");
 					petColor = scan.nextLine();
@@ -300,19 +286,19 @@ public class PetMain {
 					}
 				}
 				pet.setPetColor(petColor);
-				petDao.updatePetColor(pet);
-				break;
-
+			
+				
 			// update Image
-			case 9:
+			
 				System.out.println("enter link address of image");
 				petImage = scan.nextLine();
 				pet.setPetImage(petImage);
-				petDao.updatePetPrice(pet);
+				
+				petDao.update(pet);
 				break;
 
 			// delete pet
-			case 10:
+			case 2:
 				System.out.println("enter pet id need to delete");
 				petDao.delete(pet);
 			}

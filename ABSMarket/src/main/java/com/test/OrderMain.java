@@ -9,6 +9,7 @@ import com.dao.CartItemsDao;
 import com.dao.OrderItemsDao;
 import com.dao.OrdersDao;
 import com.dao.PetDao;
+import com.exception.QtyNotAvalilable;
 import com.model.CartItems;
 import com.model.Customers;
 import com.model.OrderItems;
@@ -46,7 +47,13 @@ public class OrderMain {
 					int qty = Integer.parseInt(scan.nextLine());
 					// checking for qty matching
 					if (petdetails.getAvilableQty() < qty) {
-						System.out.println("invalid quantity");
+						try {
+							
+					    throw new QtyNotAvalilable("Quantity not available");
+					}
+						catch (QtyNotAvalilable e) {
+							System.out.println(e);
+						}
 					}
 					// if quantity matched its do update operation
 					else {
@@ -96,7 +103,7 @@ public class OrderMain {
 					    petDao.updatePetAviQty(pet);
 			    }
 			   
-				ordersDao.delete(orderId);
+				ordersDao.updateStatus(orderId);
 				System.out.println("do want continue yes/no");
 				choice=scan.nextLine();
 				}while(choice.equals("yes"));

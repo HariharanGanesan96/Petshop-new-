@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.model.Orders;
-public class OrdersDao {
+import com.petinterface.Ordersinterface;
+public class OrdersDao implements Ordersinterface{
 	
 	// To get connection from connection util
 	Connectionutil obj = new Connectionutil();
@@ -29,26 +30,9 @@ public class OrdersDao {
 			e.printStackTrace();
 		}
 	}
-     
-	// To update status in orders table
-	public void update(Orders ord) {
-		Connection con;
-		try {
-			con = obj.getDbConnect();
-			String query = "update animals_orders set status=? where Animal_id=?";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, ord.getOrderStatus());
-			pstmt.setInt(2, ord.getOrderId());
-			System.out.println(pstmt.executeUpdate() + " rows updated");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-    
+        
 	// To delete particular order from order table
-	public void delete(int ordId)  {
+	public void updateStatus(int ordId)  {
 		Connection con;
 		try {
 			con = obj.getDbConnect();

@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.model.Customers;
+import com.petinterface.CustomerInterface;
 
-public class CustomerDao {
+public class CustomerDao implements CustomerInterface{
 
 	Connectionutil obj = new Connectionutil();
 
@@ -36,18 +37,44 @@ public class CustomerDao {
 		}
 		
 	}
-
-	public void update(Customers cus) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_bank=?,customer_address=?,customer_pincode=?,customer_city=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setLong(1, cus.getBank());
-		pstmt.setString(2, cus.getAddress());
-		pstmt.setInt(3, cus.getPincode());
-		pstmt.setString(4, cus.getCity());
-		;
-		pstmt.setInt(5, cus.getCustomerId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
+	
+	public void update(Customers cus)  {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "update Customers set customer_firstname=?,customer_lastname=?,"
+					+ "customer_username=?,customer_password=?,customer_email=?,customer_mobilenumber=?,customer_gender=? where customer_id=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, cus.getFirstName());
+			pstmt.setString(2, cus.getLastName());
+			pstmt.setString(3, cus.getUserName());
+			pstmt.setString(4, cus.getPassword());
+			pstmt.setString(5, cus.getEmail());
+			pstmt.setLong(6, cus.getNumber());
+			pstmt.setString(7, cus.getGender());
+			pstmt.setInt(8, cus.getCustomerId());
+			System.out.println(pstmt.executeUpdate() + " rows updated");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+	public void updateAddressDetails(Customers cus)  {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "update Customers set customer_address=?,customer_pincode=?,customer_city=? where customer_id=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, cus.getAddress());
+			pstmt.setInt(2, cus.getPincode());
+			pstmt.setString(3, cus.getCity());
+			pstmt.setInt(4, cus.getCustomerId());
+			System.out.println(pstmt.executeUpdate() + " rows updated");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}	
 
 	public void delete(Customers customer) {
@@ -164,7 +191,7 @@ public class CustomerDao {
 			while (re.next()) {	
 	        	System.out.format("%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s",
 	        			re.getInt(1), re.getString(2), re.getString(3), re.getString(4),re.getString(5),
-	        			re.getString(6), re.getString(7), re.getLong(8), re.getLong(9), re.getDate(10),
+	        			re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
 				        re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -173,8 +200,9 @@ public class CustomerDao {
 		}
 		
 	}
-	public Customers customerDetails(String userName) {
-		
+	
+	
+	public Customers customerDetails(String userName) {	
 		Customers customer =null;
 		Connection con;
 		try {
@@ -184,7 +212,7 @@ public class CustomerDao {
 			ResultSet re = pstmt.executeQuery();
 			while (re.next()) {
 				 customer=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
-						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getLong(9), re.getDate(10),
+						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
 						re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
 				
 			}
@@ -198,121 +226,36 @@ public class CustomerDao {
 		return customer;
 	}
 
-	public void updateBank(int cusId,long bank) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_bank=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setLong(1, bank);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
+	public void updateImage(Customers cus)  {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "update Customers set customer_image=? where customer_id=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1,cus.getImage());
+			pstmt.setInt(2, cus.getCustomerId());
+			System.out.println(pstmt.executeUpdate() + " rows updated");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	public void updateFirstName(Customers cus) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_firstname=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1,cus.getFirstName() );
-		pstmt.setInt(2, cus.getCustomerId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
+	public void updateWallet(Customers cus) {
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "update Customers set customer_wallet=? where customer_id=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setDouble(1,cus.getWallet());
+			pstmt.setInt(2, cus.getCustomerId());
+			System.out.println(pstmt.executeUpdate() + " rows updated");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	public void updateLastName(int cusId,String lastName) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_lastname=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, lastName);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateUserName(int cusId,String userName) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_username=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, userName);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updatePassword(int cusId,String password) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_password=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, password);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateNumber(int cusId,long number) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_mobilenumber=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setLong(1, number);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateGender(Customers cus) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_gender=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, cus.getGender());
-		pstmt.setInt(2, cus.getCustomerId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateEmail(int cusId,String email) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_email=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, email);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateAddress(int cusId,String address) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_address=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1,address );
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updatePincode(int cusId,int pincode) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_pincode=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setInt(1,pincode );
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateCity(int cusId,String city) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_city=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, city);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateImage(int cusId,String image) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_image=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, image);
-		pstmt.setInt(2, cusId);
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
-
-	public void updateAddressPincode(Customers cus) throws SQLException, ClassNotFoundException {
-		Connection con = obj.getDbConnect();
-		String query = "update Customers set customer_address=?,customer_pincode=? where customer_id=?";
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, cus.getAddress());
-		pstmt.setInt(2, cus.getPincode());
-		pstmt.setInt(3, cus.getCustomerId());
-		System.out.println(pstmt.executeUpdate() + " rows updated");
-	}
 }
