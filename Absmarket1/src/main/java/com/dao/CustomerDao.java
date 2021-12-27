@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.model.Customers;
+import com.petclass.Customers;
 import com.petinterface.CustomerInterface;
 
 public class CustomerDao implements CustomerInterface{
@@ -280,5 +280,7 @@ public class CustomerDao implements CustomerInterface{
 		}
 		
 	}
+
+	
 
 }

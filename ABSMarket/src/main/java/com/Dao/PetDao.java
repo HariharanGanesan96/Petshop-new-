@@ -117,7 +117,7 @@ public class PetDao implements PetInterface{
 		PetDetails pet=null;
 		try {
 			con = obj.getDbConnect();
-			String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate,available_qty"
+			String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate,available_qty,customer_id"
 					+ " from pet_details where pet_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			
@@ -126,7 +126,7 @@ public class PetDao implements PetInterface{
 			while (re.next()) {
 				 pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
 						re.getDate(5),re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
-						re.getDate(11),re.getInt(12));
+						re.getDate(11),re.getInt(12),re.getInt(13));
 			}	
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

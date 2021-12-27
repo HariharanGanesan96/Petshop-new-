@@ -144,7 +144,7 @@ public class PetDetails {
 	
 	// show all the pet details for customer
 		public PetDetails(int petId, String petType, String petName, String petGender, Date petDob, 
-				String description,String petColor,int petQty,  double petprice, String petImage,  Date regDate,int availableQty) {
+				String description,String petColor,int petQty,  double petprice, String petImage,  Date regDate,int availableQty,int customerId) {
 			super();
 			this.petId = petId;
 			this.petType = petType;
@@ -158,6 +158,7 @@ public class PetDetails {
 			this.petImage = petImage;
 			this.regDate = regDate;
 			this.avilableQty=availableQty;
+			this.customerId=customerId;
 		}
 	
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.dao.CartItemsDao;
+import com.dao.CustomerDao;
 import com.dao.OrderItemsDao;
 import com.dao.OrdersDao;
 import com.dao.PetDao;
@@ -21,6 +22,7 @@ public class OrderMain {
 	public void orderMain(Customers customer) throws ClassNotFoundException, SQLException {
 		Scanner scan = new Scanner(System.in);
 		PetDao petDao = new PetDao();
+		CustomerDao cusDao=new CustomerDao();
 		OrdersDao ordersDao = new OrdersDao();
 		OrderItemsDao orderItemsDao = new OrderItemsDao();
 		String choice;
@@ -57,13 +59,32 @@ public class OrderMain {
 					}
 					// if quantity matched its do update operation
 					else {
+						System.out.println(customer.getWallet());
+						if(customer.getWallet()>(qty*petdetails.getPetprice())) {
+							
+							
 						petdetails.setAvilableQty((petdetails.getAvilableQty()) - qty);
 						petDao.updatePetAviQty(petdetails);
+						
+						
+						customer.setWallet(customer.getWallet()-(qty*petdetails.getPetprice()));
+						cusDao.updateWallet(customer);
+					
+						Customers petCustomer=cusDao.customerDetails(petdetails.getCustomerId());
+						petCustomer.setWallet(petCustomer.getWallet()+(qty*petdetails.getPetprice()));
+						
+						cusDao.updateWallet(petCustomer);
+						
+						
 						// store the values in list
 						OrderItems ordersItem = new OrderItems(petId, qty, petdetails.getPetprice(),
 								(qty * petdetails.getPetprice()));
 						itemlist.add(ordersItem);
 						sum += qty * petdetails.getPetprice();
+					}
+						else {
+							System.out.println("Insufficient balance");
+						}
 					}
 					System.out.println("do you want Continue yes/no");
 					choice = scan.nextLine();
@@ -100,7 +121,16 @@ public class OrderMain {
 			    	 PetDetails pet=new PetDetails();
 			    	 pet.setPetId(oi.getPetId());
 			    	 pet.setAvilableQty(pet.getAvilableQty()+oi.getQuantity());
-					    petDao.updatePetAviQty(pet);
+					 petDao.updatePetAviQty(pet);
+					 
+					 customer.setWallet(customer.getWallet()+(oi.getTotalPrice()));
+					 cusDao.updateWallet(customer);
+					 PetDetails petdetails = petDao.showPet(oi.getPetId());
+					
+						Customers petCustomer=cusDao.customerDetails(petdetails.getCustomerId());
+						petCustomer.setWallet(petCustomer.getWallet()-oi.getTotalPrice());
+						cusDao.updateWallet(petCustomer);
+					 
 			    }
 			   
 				ordersDao.updateStatus(orderId);
