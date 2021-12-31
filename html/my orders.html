@@ -1,0 +1,77 @@
+<!-- <%@page import="com.dao.OrderItemsDao"%>
+<%@page import ="java.sql.ResultSet"%>
+<%@page import="com.model.Customers"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%> -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+    table{
+        background-color: rgba(255, 254, 254, 0.815);
+        padding: 20px;
+    }
+    table tr,th{
+        padding: 10px;
+    }
+    table br{
+        background-color: white;
+    }
+    #c{
+        background-color: blanchedalmond;     
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<!-- <%Customers customerDetails=new Customers();
+  customerDetails=(Customers)session.getAttribute("customer");
+  OrderItemsDao orderItemDao=new OrderItemsDao();
+  ResultSet rs=orderItemDao.showMyOrders(customerDetails); %> -->
+
+<table cellspacing=0px>
+<thead>
+<tr id="c">
+<th>Order id</th>
+<th>Pet id</th>
+<th>Pet name</th>
+<th>Unit_price</th>
+<th>Quantity</th>
+<th>Total price</th>
+<th>Status</th>
+<th>Order date</th>	
+</tr>
+</thead>
+<tbody>
+    <div>
+        <br>
+    <tr id="c">
+        <th>Order id</th>
+        <th>Pet id</th>
+        <th>Pet name</th>
+        <th>Unit_price</th>
+        <th>Quantity</th>
+        <th>Total price</th>
+        <th>Status</th>
+        <th>Order date</th>	
+        </tr>
+    </div>
+<!-- <%while(rs.next()){ %>
+<tr>
+<td><%=rs.getInt(1)%></td>
+<td><%=rs.getInt(2)%></td>
+<td><%=rs.getString(3)%></td>
+<td><%=rs.getDouble(4)%></td>
+<td><%=rs.getInt(5)%></td>
+<td><%=rs.getDouble(6)%></td>
+<td><%=rs.getString(7)%></td>
+<td><%=rs.getDate(8)%></td>
+</tr>
+<%} %> -->
+</tbody>
+</table>
+</body>
+</html>

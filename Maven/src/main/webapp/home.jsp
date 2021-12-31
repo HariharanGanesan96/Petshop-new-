@@ -1,4 +1,4 @@
-<%@page import="com.dao.PetDao"%>
+<%@page import="com.petshop.daoimpl.PetDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -19,7 +19,7 @@
         <input type="search" id="searchinput" placeholder="Enter pet category or name">
         <button id="search">search</button>
         <ul  id="menu">
-        <li><a href="myprofile1.jsp">My Profile</a></li>
+        <li><a href="myprofile.jsp">My Profile</a></li>
         <li><a href="mycart.jsp">My cart</a></li>
         <li><a href="myorders.jsp">My orders</a></li>
         <li><a href="additem.jsp">Add item</a></li>
@@ -34,8 +34,10 @@
             <button id="fish" title="fish">Fish</button>
         </div>
        <div>
-       <%PetDao petdao=new PetDao(); 
-           petdao.showAllpets();%>
+       <%
+       PetDAO petdao=new PetDAO(); 
+                  petdao.showAllpets();
+       %>
        </div>
     </div>
     </div>

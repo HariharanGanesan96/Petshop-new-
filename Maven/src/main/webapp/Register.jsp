@@ -139,7 +139,7 @@
                 </tr>
                 <tr>
                     <td><label for="mobile">Phone <span>*</span></label></td>
-                    <td><input type="number" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required></td>
+                    <td><input type="number" name="mobile" id="mobileinput" pattren="[789][0-9]+{10}" placeholder="MobileNumber" required></td>
                 </tr>
                 <tr>
                     <td><label for="email" >Email <span>*</span></label></td>
