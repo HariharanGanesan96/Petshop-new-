@@ -26,7 +26,6 @@
             <input type="password" name="passwordinput" id="passwordinput" placeholder="Enter the password" pattern="[a-zA-Z0-9!@#$%^&*()]+{8,20}" title="password must be in 8 character" required>
             <br>
             <button type="submit" id="login">Login</button>
-            <p id="message" name="message"></p>
             <p>Don't have account ?<a href="Register.html">Register here</a></p>
         </form>
     </div>

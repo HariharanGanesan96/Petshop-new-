@@ -1,7 +1,7 @@
+@charset "ISO-8859-1";
 *{
     margin: 0;
     padding: 0;
-   
 }
 h1{
     font-family: 'Times New Roman';
@@ -32,6 +32,9 @@ h1{
     font-size: 25px;
     margin-top: -5px;
 }
+#message{
+	display: none;
+}
  form input{
          height: 30px;
          width: 250px;
@@ -58,9 +61,9 @@ h1{
 
  }
 #background{
-    background: linear-gradient(rgba(0,0,0,.5)50%,rgba(0,0,0,.5)50%) ,url("https://images.pexels.com/photos/4148860/pexels-photo-4148860.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    height: 100vh;
-    color: white;
+    background: linear-gradient(rgba(0,0,0,.5)50%,rgba(0,0,0,.5)50%), url("https://images.pexels.com/photos/4148860/pexels-photo-4148860.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    color: white;
 }

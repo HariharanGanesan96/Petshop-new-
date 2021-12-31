@@ -1,3 +1,7 @@
+<%@page import="com.dao.PetDao"%>
+<%@page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="home.css">
+       <link rel="stylesheet" href="home.css">
 </head>
 <body>
     <div class="background">
@@ -15,11 +19,11 @@
         <input type="search" id="searchinput" placeholder="Enter pet category or name">
         <button id="search">search</button>
         <ul  id="menu">
-        <li><a href="">My Profile</a></li>
-        <li><a href="">My cart</a></li>
-        <li><a href="">My orders</a></li>
-        <li><a href="">Add item</a></li>
-        <li><a href="">Home</a></li> 
+        <li><a href="myprofile1.jsp">My Profile</a></li>
+        <li><a href="mycart.jsp">My cart</a></li>
+        <li><a href="myorders.jsp">My orders</a></li>
+        <li><a href="additem.jsp">Add item</a></li>
+        <li><a href="home.jsp">Home</a></li>
         </ul>
         </div>
         <div class="animalscategory">
@@ -29,14 +33,11 @@
             <button id="birds" title="birds">Birds</button>
             <button id="fish" title="fish">Fish</button>
         </div>
-        <div class="recentlyadded">
-            <h2>recently added</h2>
-            <button id="" title=""></button>
-            <button id="" title=""></button>
-            <button id="" title=""></button>
-            <button id="" title=""></button>
-        </div>
+       <div>
+       <%PetDao petdao=new PetDao(); 
+           petdao.showAllpets();%>
+       </div>
     </div>
     </div>
 </body>
-</html>
+</html></html>

@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 *{
     margin: 0;
     padding: 0;
@@ -14,22 +15,17 @@ h1{
     display: inline;
     width: 300px;
     position: absolute;
-    top: 15px;
+    top: 5px;
     font-size: x-large;
 }
 #search{
     width: 100px;
     height: 30px;
     border: 1px solid;
-    border-color: tomato ;
-    color: white;
-    border-top-right-radius: 10px;
     border-left: none;
     position: absolute;
     left: 630px;
-    background-color:tomato;
 }
-
 #searchinput{
     padding-left: 10px;
     position: absolute;
@@ -39,8 +35,6 @@ h1{
     height: 30px;
     border: 1px solid;
     border-color: tomato;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius:10px;
     background-color: transparent;
     color: black;
     border-right: none;
@@ -70,24 +64,6 @@ input:focus{
     margin-left: 50px;
 }
 .animalscategory button{
-    width: 275px;
-    height: 200px;
-    margin-top: 20px;
-    margin-left: 50px;
-    background-color: transparent;
-    border: 1px solid;
-    border-color: black;
-    border-radius: 8px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
-    font-weight: bold;
-    color:white;
-}
-.recentlyadded h2{
-    margin-top: 35px;
-    margin-left: 50px;
-}
-.recentlyadded button{
     width: 275px;
     height: 200px;
     margin-top: 20px;

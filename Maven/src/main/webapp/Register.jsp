@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,37 +113,37 @@
                 </tr>
                 <tr>
                     <td><label for="firstname">FirstName <span>*</span></label></td>
-                    <td><input type="text" onkeypress=" valFirstName()" name="firstname" id="firstnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Firstname" required><p id="firstnamecomment"></p></td>
+                    <td><input type="text" name="firstname" id="firstnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Firstname" required><p id="firstnamecomment"></p></td>
                 </tr>
                 <tr>
                     <td><label for="lastname">LastName <span>*</span></label></td>
-                    <td><input type="text" onpointerout="valLastName()" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required><p id="lastnamecomment"></p></td>
+                    <td><input type="text" name="lastname" id="lastnameinput" pattern="[a-zA-Z]{3,20}" title="Name contains only letter" placeholder="Lastname" required></td>
                 </tr>
                 <tr>
                     <td><label for="Gendr">Gender <span>*</span></label></td>
-                    <td><input type="text" onpointerout="valGender()" name="gender" id="genderinput" pattern="[a-zA-Z]{3,10}" title="Name contains only letter" placeholder="Gender" list="genderlist" required><p id="gendercomment"></p></td>
+                    <td><input type="text" name="gender" id="genderinput" pattern="[a-zA-Z]{3,10}" title="Name contains only letter" placeholder="Gender" list="genderlist" required></td>
                 </tr>
                 <tr>
                      <td><label for="username">UserName <span>*</span></label></td>
-                     <td><input type="text" onpointerout="valUsername()" name="username" id="usernameinput" placeholder="username"  pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required><p id="usernamecomment"></p></td>
+                     <td><input type="text" name="username" id="usernameinput" placeholder="username"  pattern="[a-zA-Z0-9]{8,20}" title="minimum 8 character required " required></td>
                 </tr>
                 <tr>
                     <!--^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%*?&]{8,15}-->
                     <td><label for="password">Password <span>*</span></label></td>
-                    <td><input type="password" onpointerout="valPassword()" name="password" id="passwordinput" placeholder="password" pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required><p id="passwordcomment"></p></td>
+                    <td><input type="password" name="password" id="passwordinput" placeholder="password" pattern="[a-zA-Z0-9!@#$%^&*()_+]{8,20}" required></td>
                 </tr>
                 <tr>
                     <td><label for="repassword">Re-Password <span>*</span></label></td>
-                    <td><input type="password" onpointerout="valRePassword()"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required><p id="repasswordcomment"></p></td>
+                    <td><input type="password" onpointerout="valPassword()"  name="Re-password" id="repasswordinput" placeholder="Re enter password" required><p id="repasswordcomment"></p></td>
                     
                 </tr>
                 <tr>
                     <td><label for="mobile">Phone <span>*</span></label></td>
-                    <td><input type="text" onpointerout="valMobile()" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required><p id="mobilecomment"></p></td>
+                    <td><input type="number" name="mobile" id="mobileinput" pattren="[789][0-9]{9}" placeholder="MobileNumber" required></td>
                 </tr>
                 <tr>
                     <td><label for="email" >Email <span>*</span></label></td>
-                    <td><input type="email" onpointerout="valEmail()" name="email" id="emailinput" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required><p id="emailcomment"></p></td>
+                    <td><input type="email" name="email" id="emailinput" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required></td>
                 </tr>
                 <tr>
                     <td><button type="submit" id="register">Register</button></td>
@@ -157,36 +159,33 @@
     </form>
 </div>
 <script>
-    function valRePassword(){
+    function valPassword(){
         let password=document.getElementById("passwordinput").value;
         let repassword=document.getElementById("repasswordinput").value;
         let comment= document.getElementById("repasswordcomment");
         if(password==repassword){
+            console.log("called if");
             comment.style.display="none";
-    }
-    else{  
-        comment.style.display="block";
-        comment.style.color="red";
-        comment.innerHTML="password does not match";    
-    }
+     }
+     else{
+        
+         comment.style.display="block";
+         comment.innerHTML="password does not match";
+         comment.style.color="red";
+         comment.style.fontSize="17px";
+         console.log("called else");
+    }	
 }
-function valFirstName(){
-        let firstName=document.getElementById("firstnameinput").value;
+function valfirstname(){
+        let firstname=document.getElementById("firstnameinput").value;
         let comment= document.getElementById("firstnamecomment");
-        if (firstName.length <= 2) {
-            comment.innerHTML="Must have minimum 3 character";
-            comment.style.color="red";
-            comment.style.fontSize="17px";
-            
-		}
-         else if (firstName.matches("^[a-zA-Z]n+") || firstName.matches(".*\\d.*")) {
-            comment.innerHTML="Alphabet only";
-            comment.style.color="red";
-            comment.style.fontSize="17px";
-	    }
-        else{
-            comment.style.display="none";
+        if(firstname.legth>2){
+        	 comment.style.display="block";
+        	 comment.innerHTML="password does not match";
+        	 comment.style.color="red";
+             comment.style.fontSize="17px";	
         }
+        
         
 }
 </script>
