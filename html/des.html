@@ -1,0 +1,63 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.petshop.daoimpl.PetDAO"%>
+<%@page import="java.util.*"%>
+<%@page import="com.petshop.model.*"%>
+<%@page import="java.sql.ResultSet"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+     <% //List<PetDetails> petList=new ArrayList<PetDetails>();
+        PetDetails pet=new PetDetails();
+        PetDAO petdao=new PetDAO();      
+        int petid=Integer.parseInt(request.getParameter("petid"));
+        pet=petdao.showPet(petid);
+        SimpleDateFormat formet=new SimpleDateFormat("dd-mm-yyyy");
+        Date date=pet.getPetDob();
+        String dob=formet.format(date);
+       %>
+       <table>
+        <tbody>
+            <tr>
+               <td rowspan="7"><img src="<%=pet.getPetImage() %>" alt=""></td>
+               <td>Type: </td>
+               <td><%=pet.getPetType()%></td>
+               <td>Name:</td>
+               <td><%=pet.getPetName()%></td>
+            </tr>
+            <tr>
+               <td>Gender:</td>
+               <td><%=pet.getPetGender()%></td>
+               <td>Dob:</td>
+               <td><%=dob %></td>
+             </tr>
+             <tr>
+               <td>Color:</td>
+               <td><%=pet.getPetColor()%></td>
+               <td>Unit Price:</td>
+               <td><%=pet.getPetprice() %></td>
+             </tr>
+              <tr>
+               <td>Available Qty:</td>
+               <td><%=pet.getPetColor()%></td>
+               <td>Supplier Name:</td>
+               <td><%=pet.getPetprice() %></td>
+             </tr>
+             
+              <tr>
+               <td colspan="4">Description:<%=pet.getDescription()%> </td>
+             </tr>
+             <tr>
+               <td><a href="AddToCart?petid=<%=pet.getPetId()%>"><button>Add to Cart</button></a></td>
+               <td><a href="BuyNow?petid=<%=pet.getPetId()%>"><button>Buy Now</button></a></td>
+             </tr>
+             <td name="message" id="message"></td>
+             <tr>
+             </tr>
+</body>
+</html>

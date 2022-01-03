@@ -1,7 +1,10 @@
 <%@page import="com.petshop.daoimpl.PetDAO"%>
+<%@page import="java.util.*"%>
+<%@page import="com.petshop.model.*"%>
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +15,12 @@
        <link rel="stylesheet" href="home.css">
 </head>
 <body>
-    <div class="background">
+<%      List<PetDetails> petList=new ArrayList<PetDetails>();
+        PetDetails pet=new PetDetails();
+        PetDAO petdao=new PetDAO();      
+        petList=petdao.showAllpets();
+       %>
+    <div class="backgroundpage">
         <div class="head">
         <div class="navigation">
         <h1>PET Shop</h1>
@@ -22,24 +30,52 @@
         <li><a href="myprofile.jsp">My Profile</a></li>
         <li><a href="mycart.jsp">My cart</a></li>
         <li><a href="myorders.jsp">My orders</a></li>
-        <li><a href="additem.jsp">Add item</a></li>
+        <li><a href="AddItem.jsp">Add item</a></li>
         <li><a href="home.jsp">Home</a></li>
         </ul>
         </div>
-        <div class="animalscategory">
-            <h2>Top category</h2>
-            <button id="dog" title="dog">Dog</button>
-            <button id="cat" title="cat">Cat</button>
-            <button id="birds" title="birds">Birds</button>
-            <button id="fish" title="fish">Fish</button>
+        
+        
+        <h2 class="petlist">Pet List</h2>
+        
+        <div class="recently added list">
+        <table>
+            <tbody>
+                <tr>
+                <%int count=0;
+                for(PetDetails petDetails: petList){
+                	%>
+                    <td>
+                        <table id="pets">
+                            <tbody>
+                                <tr>
+                                    <td><img src="<%=petDetails.getPetImage()%>" alt="petimage"></td>    
+                                    <td class="petdetails">
+                                        <span>Type : <%=petDetails.getPetType()%> </span><br>
+                                        <span>Name : <%=petDetails.getPetName()%>  </span><br>
+                                        <span>Color : <%=petDetails.getPetColor()%> </span><br>
+                                        <span>price : Rs.<%=petDetails.getPetprice() %> </span><br>
+                                        <span>Qty: <%=petDetails.getAvilableQty() %></span><br>
+                                        <a href="PetDescription.jsp?petid=<%=petDetails.getPetId() %>"><button>view</button></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>  
+                        
+                            
+                    </td>
+                       <% count ++;
+                       if(count==3){ %> 
+                    	   </tr>
+                    	   <tr>              
+                     <%count=0; }}%>  
+                       
+                </tr>
+            </tbody>
+        </table>
+         
         </div>
-       <div>
-       <%
-       PetDAO petdao=new PetDAO(); 
-                  petdao.showAllpets();
-       %>
-       </div>
     </div>
-    </div>
+   </div>
 </body>
 </html></html>

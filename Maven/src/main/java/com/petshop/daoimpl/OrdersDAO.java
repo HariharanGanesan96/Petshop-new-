@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.petshop.dao.Ordersinterface;
 import com.petshop.model.Orders;
-public class OrdersDAO implements Ordersinterface{
+import com.petshop.util.ConnectionUtil;
+
+
+
+
+public class OrdersDAO{
 	
 	// To get connection from connection util
-	Connectionutil obj = new Connectionutil();
+	ConnectionUtil obj = new ConnectionUtil();
 	
 	//To insert the values on orders table
 	public void insert(Orders ord) {
@@ -21,7 +25,7 @@ public class OrdersDAO implements Ordersinterface{
 			String query = "insert into orders(Customer_id,total_price) \r\n"
 					+ "values(?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, ord.getCustomerId());
+			pstmt.setInt(1, ord.getCustomer().getCustomerId());
 			pstmt.setDouble(2, ord.getTotalprice());
 			int i=pstmt.executeUpdate();
 			System.out.println( i+ " rows inserted");

@@ -4,8 +4,8 @@ package com.petshop.model;
 
 public class CartItems {
 	private int itemId;
-	private int petId;
-	private int customerId;
+	private PetDetails pet =new PetDetails();
+	private Customers customer=new Customers();
 	private int quantity;
 	private double unitPrice;
 	private double totalPrice;
@@ -15,17 +15,17 @@ public class CartItems {
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
-	public int getPetId() {
-		return petId;
+	public PetDetails getPet() {
+		return pet;
 	}
-	public void setPetId(int animalId) {
-		this.petId = animalId;
+	public void setPet(PetDetails pet) {
+		this.pet = pet;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customers getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int cartId) {
-		this.customerId = cartId;
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
 	}
 	public int getQuantity() {
 		return quantity;
@@ -45,55 +45,24 @@ public class CartItems {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CartItems other = (CartItems) obj;
-		return petId == other.petId && customerId == other.customerId && itemId == other.itemId
-				&& quantity == other.quantity
-				&& Double.doubleToLongBits(totalPrice) == Double.doubleToLongBits(other.totalPrice)
-				&& Double.doubleToLongBits(unitPrice) == Double.doubleToLongBits(other.unitPrice);
-	}
+	
 	@Override
 	public String toString() {
-		return "CartItems [itemId=" + itemId + ", petId=" + petId + ", customerId=" + customerId + ", quantity="
-				+ quantity + ", unitPrice=" + unitPrice + ", totalPrice=" + totalPrice + "]";
+		return "CartItems [itemId=" + itemId + ", pet=" + pet + ", customer=" + customer + ", quantity=" + quantity
+				+ ", unitPrice=" + unitPrice + ", totalPrice=" + totalPrice + "]";
 	}
 	public CartItems() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CartItems(int itemId, int quantity) {
+	public CartItems(int itemId, int petId,int customerId, int quantity, double unitPrice,
+			double totalPrice) {
 		super();
 		this.itemId = itemId;
-		this.quantity = quantity;
-	}
-	public CartItems(int petId, int customerId, int quantity, double unitPrice,double totalprice ) {
-		super();
-		this.petId = petId;
-		this.customerId = customerId;
-		this.quantity = quantity;
-		this.unitPrice = unitPrice;
-		this.totalPrice=totalprice;
-	}
-	public CartItems(int itemId, int petId, int customerId, int quantity, double unitPrice, double totalPrice) {
-		super();
-		this.itemId = itemId;
-		this.petId = petId;
-		this.customerId = customerId;
+		this.pet.setPetId(petId);
+		this.customer.setCustomerId(customerId);
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.totalPrice = totalPrice;
 	}
-	
-	
-	
-
 }

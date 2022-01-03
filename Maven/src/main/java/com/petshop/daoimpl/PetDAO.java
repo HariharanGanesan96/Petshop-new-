@@ -5,22 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import com.petshop.model.*;
+import com.petshop.util.*;
 
-import com.petshop.dao.PetInterface;
-import com.petshop.model.PetDetails;
-public class PetDAO implements PetInterface{
-              
+
+public class PetDAO {
+
 	   SimpleDateFormat formeter=new SimpleDateFormat("dd-mm-yyyy");
-	   Connectionutil obj = new Connectionutil();
+	   
+	   List<PetDetails> petList=new ArrayList<PetDetails>();
+	   PetDetails pet=new PetDetails();
+	   
+	   ConnectionUtil obj = new ConnectionUtil();
 	 // insert operation from user
 	public void insert(PetDetails pet) {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
 			String query = "INSERT into pet_details(pet_type,pet_name,pet_gender,pet_dob,pet_Qty,pet_description,\r\n"
-					+ "pet_color,pet_price,pet_image,customer_id,available_qty) values(?,?,?,?,?,?,?,?,?,?,?)";					
+					+ "pet_color,pet_price,pet_image,customer_id,available_qty) values(?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pet.getPetType());
 			pstmt.setString(2, pet.getPetName());
@@ -32,7 +36,7 @@ public class PetDAO implements PetInterface{
 			pstmt.setString(7, pet.getPetColor());
 			pstmt.setDouble(8, pet.getPetprice());
 			pstmt.setString(9,pet.getPetImage());
-			pstmt.setInt(10, pet.getCustomerId());
+			pstmt.setInt(10, pet.getCustomer().getCustomerId());
 			pstmt.setInt(11, pet.getAvilableQty());
 			System.out.println(pstmt.executeUpdate() + " rows inserted");
 		} catch (ClassNotFoundException | SQLException e) {
@@ -40,7 +44,7 @@ public class PetDAO implements PetInterface{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void update(PetDetails pet) {
 		Connection con;
 		try {
@@ -49,7 +53,7 @@ public class PetDAO implements PetInterface{
 					+ "pet_gender=?,pet_dob=?,pet_Qty=?,pet_description=?,"
 					+ "pet_color=?,pet_price=?,pet_image=?,customer_id=?,"
 					+ "available_qty=? where pet_id=?";
-			
+
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, pet.getPetType());
 			pstmt.setString(2, pet.getPetName());
@@ -61,17 +65,17 @@ public class PetDAO implements PetInterface{
 			pstmt.setString(7, pet.getPetColor());
 			pstmt.setDouble(8, pet.getPetprice());
 			pstmt.setString(9, pet.getPetImage());
-			pstmt.setInt(10, pet.getCustomerId());
+			pstmt.setInt(10, pet.getCustomer().getCustomerId());
 			pstmt.setInt(11, pet.getPetQty());
 			pstmt.setInt(12, pet.getPetId());
-			
+
 			System.out.println(pstmt.executeUpdate()+ " rows updated");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
-     
+
 	// To update pet Status
 	public void updateStatus(int petId,String status,int adminId) {
 		Connection con;
@@ -87,28 +91,29 @@ public class PetDAO implements PetInterface{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	// to show all the approved pet details
-	public void showAllpets()  {
+	public List<PetDetails> showAllpets()  {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
-			String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate,available_qty"
-					+ " from pet_details where status='approved' and available_qty >0";
+			String query = "select * from pet_details where status='approved' and available_qty > 0";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery();
-			while (re.next()) {			
-			System.out.format("%5s,%15s,%15s,%15s,%15s,%15s,%50s,%15s,%15s,%15s,%15s,%15s\n",
-					re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getDate(5),
-					re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
-					re.getDate(11),re.getInt(12));
+			ResultSet resultSet = pstmt.executeQuery();
+			while (resultSet.next()) {
+				pet=new PetDetails(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),
+						resultSet.getDate(5),resultSet.getInt(6),resultSet.getString(7),resultSet.getString(8),
+						resultSet.getDouble(9),resultSet.getString(10),resultSet.getString(11),resultSet.getInt(12),resultSet.getInt(13),
+						resultSet.getDate(14),resultSet.getInt(15));
+				petList.add(pet);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();	
-		}	
+			e.printStackTrace();
+		}
+		return petList;
 	}
 
 	// to get particular pet data
@@ -117,45 +122,53 @@ public class PetDAO implements PetInterface{
 		PetDetails pet=null;
 		try {
 			con = obj.getDbConnect();
-			String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,pet_color,pet_qty,pet_price,pet_image,pet_registerdate,available_qty,customer_id"
-					+ " from pet_details where pet_id=?";
+			String query = "select * from pet_details where pet_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			
+
 			pstmt.setInt(1,petId );
 			ResultSet re = pstmt.executeQuery();
 			while (re.next()) {
+
 				 pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
-						re.getDate(5),re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
-						re.getDate(11),re.getInt(12),re.getInt(13));
-			}	
+						re.getDate(5),re.getInt(6),re.getString(7),re.getString(8),
+						re.getDouble(9),re.getString(10),re.getString(11),re.getInt(12),re.getInt(13),
+						re.getDate(14),re.getInt(15));
+				  query = "select * from customers where customer_id=?";	
+				  pstmt = con.prepareStatement(query);
+				  pstmt.setInt(1,re.getInt(12));
+				  re = pstmt.executeQuery();
+				  if(re.next()) {
+					  pet.getCustomer().setFirstName(re.getString(2));
+				  }
+				  
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return pet;	
+		return pet;
 	}
-	
+
 	// pet list to show admin
-	public void showNotApprovedPetList() {
+	public List<PetDetails> showNotApprovedPetList() {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
-			String query = "select pet_id,pet_type,pet_name,pet_gender,pet_dob,pet_description,"
-					+ "pet_color,pet_qty,pet_price,pet_image,status,customer_id,pet_registerdate,available_qty"
-					+ " from pet_details where status='Not approved'";
+			String query = "select * from pet_details where status='Not approved'";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			ResultSet re = pstmt.executeQuery();
 			while (re.next()) {
-				System.out.format("%5s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s\n",
-						re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getDate(5),
-						re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
-						re.getString(11),re.getInt(12),re.getDate(13),re.getInt(14));
-				
-			}	
+				 pet=new PetDetails(re.getInt(1),re.getString(2),re.getString(3),re.getString(4),
+							re.getDate(5),re.getInt(6),re.getString(7),re.getString(8),
+							re.getDouble(9),re.getString(10),re.getString(11),re.getInt(12),re.getInt(13),
+							re.getDate(14),re.getInt(15));
+				 petList.add(pet);
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		return petList;
 	}
 
 	// My pet details for customer
@@ -168,19 +181,19 @@ public class PetDAO implements PetInterface{
 			PreparedStatement pstmt = con.prepareStatement(query);
 			ResultSet re = pstmt.executeQuery();
 			while (re.next()) {
-						
+       
 			  System.out.format("%5s,%8s,%15s,%6s,%10s,%100s,%10s,%5s,%5s,%100s,%15s,%10s,%5s\n",
 					    re.getInt(1),re.getString(2),re.getString(3),re.getString(4),re.getDate(5),
 					    re.getString(6),re.getString(7),re.getInt(8),re.getDouble(9),re.getString(10),
 						re.getString(11),re.getDate(12),re.getInt(13));
-			}	
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
-	
+
 	// To delete particular pet_details
 		public void delete(PetDetails pet) {
 			Connection con;
@@ -194,7 +207,7 @@ public class PetDAO implements PetInterface{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	// update available qty
@@ -203,15 +216,15 @@ public class PetDAO implements PetInterface{
 			try {
 				con = obj.getDbConnect();
 				String query = "update Pet_details set available_qty=? where pet_id=?";
-				PreparedStatement pstmt = con.prepareStatement(query);	
+				PreparedStatement pstmt = con.prepareStatement(query);
 				pstmt.setInt(1,pet.getAvilableQty() );
 				pstmt.setInt(2, pet.getPetId());
 				System.out.println(pstmt.executeUpdate() + " rows updated");
-				
+
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}

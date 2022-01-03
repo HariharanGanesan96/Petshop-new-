@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Orders {
 	
 	private int orderId;
-	private int customerId;
+	private Customers customer = new Customers();
 	private double Totalprice;
 	private String orderStatus;
 	private Date orderDate;
@@ -16,11 +16,11 @@ public class Orders {
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customers getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
 	}
 	public double getTotalprice() {
 		return Totalprice;
@@ -42,26 +42,20 @@ public class Orders {
 	}
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", customerId=" + customerId + ", Totalprice=" + Totalprice
-				+ ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + "]";
+		return "Orders [orderId=" + orderId + ", customer=" + customer + ", Totalprice=" + Totalprice + ", orderStatus="
+				+ orderStatus + ", orderDate=" + orderDate + "]";
 	}
 	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Orders(int customerId, double totalprice) {
-		super();
-		this.customerId = customerId;
-		Totalprice = totalprice;
-	}
-	public Orders(int orderId, int customerId, double totalprice, String orderStatus, Date orderDate) {
+	public Orders(int orderId, Customers customer, double totalprice, String orderStatus, Date orderDate) {
 		super();
 		this.orderId = orderId;
-		this.customerId = customerId;
+		this.customer = customer;
 		Totalprice = totalprice;
 		this.orderStatus = orderStatus;
 		this.orderDate = orderDate;
 	}
-
-	
+		
 }

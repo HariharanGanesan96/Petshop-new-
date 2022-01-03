@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.petshop.model.Customers;
+import com.petshop.util.ConnectionUtil;
+
+
+
 
 public class CustomerDAO {
 
-	Connectionutil obj = new Connectionutil();
+	ConnectionUtil obj = new ConnectionUtil();
 
 	public void insert(Customers cus)  {
 		Connection con;

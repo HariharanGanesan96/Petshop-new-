@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.petshop.daoimpl.Connectionutil;
+import com.petshop.util.ConnectionUtil;
+
+
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
@@ -27,7 +29,7 @@ public class Register extends HttpServlet {
 		long mobileNumber=Long.parseLong(req.getParameter("mobile"));	
 		PrintWriter out=res.getWriter();
 		
-		Connectionutil obj = new Connectionutil();
+		ConnectionUtil obj = new ConnectionUtil();
 		Connection con;
 		try {
 			con = obj.getDbConnect();

@@ -6,15 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.petshop.model.Admin;
+import com.petshop.util.ConnectionUtil;
+
+
+
+
 
 
 
 public class AdminDAO {
-	Connectionutil obj = new Connectionutil();
+	ConnectionUtil obj = new ConnectionUtil();
 	
 	public void insert(Admin adm) throws SQLException, ClassNotFoundException {
-
-	Connectionutil obj = new Connectionutil();
 	Connection con = obj.getDbConnect();
 	String query = "insert into animals_Adminuser values(?,?,?,?,?);";
 	PreparedStatement pstmt = con.prepareStatement(query);
@@ -27,7 +30,6 @@ public class AdminDAO {
 }
 
 public void update(Admin adm) throws SQLException, ClassNotFoundException {
-	Connectionutil obj = new Connectionutil();
 	Connection con = obj.getDbConnect();
 	String query = "update animals_Adminuser set admin_password=? where admin_id=? ";
 	PreparedStatement pstmt = con.prepareStatement(query);
@@ -37,7 +39,6 @@ public void update(Admin adm) throws SQLException, ClassNotFoundException {
 }
 
 public void delete(Admin anim) throws SQLException, ClassNotFoundException {
-	Connectionutil obj = new Connectionutil();
 	Connection con = obj.getDbConnect();
 	String query = "delete from animals_Adminuser where admin_id=?";
 	PreparedStatement pstmt = con.prepareStatement(query);

@@ -15,17 +15,10 @@ public class PetDetails {
 	private double petprice;
 	private String petImage;
 	private String status;
-	private int customerId;
-	private int adminId;
+	private Customers customer =new Customers();
+	private Admin admin = new Admin();
 	private Date regDate;
 	private int avilableQty;
-	
-	public int getAvilableQty() {
-		return avilableQty;
-	}
-	public void setAvilableQty(int avilableQty) {
-		this.avilableQty = avilableQty;
-	}
 	public int getPetId() {
 		return petId;
 	}
@@ -92,17 +85,17 @@ public class PetDetails {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public Customers getCustomer() {
+		return customer;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customers customer) {
+		this.customer = customer;
 	}
-	public int getAdminId() {
-		return adminId;
+	public Admin getAdmin() {
+		return admin;
 	}
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -110,62 +103,27 @@ public class PetDetails {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
-	
+	public int getAvilableQty() {
+		return avilableQty;
+	}
+	public void setAvilableQty(int avilableQty) {
+		this.avilableQty = avilableQty;
+	}
 	@Override
 	public String toString() {
 		return "PetDetails [petId=" + petId + ", petType=" + petType + ", petName=" + petName + ", petGender="
 				+ petGender + ", petDob=" + petDob + ", petQty=" + petQty + ", description=" + description
 				+ ", petColor=" + petColor + ", petprice=" + petprice + ", petImage=" + petImage + ", status=" + status
-				+ ", customerId=" + customerId + ", adminId=" + adminId + ", regDate=" + regDate + ", avilableQty="
+				+ ", customer=" + customer + ", admin=" + admin + ", regDate=" + regDate + ", avilableQty="
 				+ avilableQty + "]";
 	}
 	public PetDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	// This constructor is used for insert operation
-	public PetDetails(String petType, String petName, String petGender, Date petDob, int petQty, String description,
-			String petColor, double petprice, String petImage, int customerId,int availableQty) {
-		super();
-		this.petType = petType;
-		this.petName = petName;
-		this.petGender = petGender;
-		this.petDob = petDob;
-		this.petQty = petQty;
-		this.description = description;
-		this.petColor = petColor;
-		this.petprice = petprice;
-		this.petImage = petImage;
-		this.customerId = customerId;
-		this.avilableQty=availableQty;
-	}
-	
-	// show all the pet details for customer
-		public PetDetails(int petId, String petType, String petName, String petGender, Date petDob, 
-				String description,String petColor,int petQty,  double petprice, String petImage,  Date regDate,int availableQty,int customerId) {
-			super();
-			this.petId = petId;
-			this.petType = petType;
-			this.petName = petName;
-			this.petGender = petGender;
-			this.petDob = petDob;
-			this.petQty = petQty;
-			this.description = description;
-			this.petColor = petColor;
-			this.petprice = petprice;
-			this.petImage = petImage;
-			this.regDate = regDate;
-			this.avilableQty=availableQty;
-			this.customerId=customerId;
-		}
-	
-	
-	// used to store all the information
 	public PetDetails(int petId, String petType, String petName, String petGender, Date petDob, int petQty,
 			String description, String petColor, double petprice, String petImage, String status, int customerId,
-			int adminId, Date regDate,int availableQty) {
+			int adminId, Date regDate, int avilableQty) {
 		super();
 		this.petId = petId;
 		this.petType = petType;
@@ -178,9 +136,12 @@ public class PetDetails {
 		this.petprice = petprice;
 		this.petImage = petImage;
 		this.status = status;
-		this.customerId = customerId;
-		this.adminId = adminId;
+		this.customer.setCustomerId(customerId);
+		this.admin.setAdminId(adminId);
 		this.regDate = regDate;
-		this.avilableQty=availableQty;
+		this.avilableQty = avilableQty;
 	}
+	
+	
+
 }

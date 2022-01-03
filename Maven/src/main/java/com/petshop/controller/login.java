@@ -32,7 +32,8 @@ public class login extends HttpServlet{
 		CustomerDAO customerDao=new CustomerDAO();
 		
 		String firstName=customerDao.cusValidation(customerValidation);
-		
+
+		HttpSession session=req.getSession();
 		if (firstName != null) {
 			String name = firstName.substring(1);
 			// customer login
@@ -41,7 +42,6 @@ public class login extends HttpServlet{
 				Customers customerDetails=new Customers(userName,passwowrd);
 				customerDetails = customerDao.customerDetails(userName);
 				System.out.println(customerDetails);
-				HttpSession session=req.getSession();
 				session.setAttribute("customer", customerDetails);
 				resp.sendRedirect("home.jsp");
 			}
@@ -52,6 +52,8 @@ public class login extends HttpServlet{
 
 					try {
 						admin = adminDao.show(userName);
+						session.setAttribute("Admin", admin);
+						resp.sendRedirect("AdminHome.jsp");
 						System.out.println(admin);
 					} catch (ClassNotFoundException | SQLException e) {
 						// TODO Auto-generated catch block
@@ -59,7 +61,6 @@ public class login extends HttpServlet{
 					}	
 			}				
 }		else {
-	            HttpSession session = req.getSession();
 	            session.setAttribute("error", "Invalid Username or Password ");
 	            resp.sendRedirect("index.jsp");
 }

@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.petshop.dao.CartItemsInterface;
 import com.petshop.model.CartItems;
 import com.petshop.model.Customers;
-import com.petshop.model.OrderItems;
+import com.petshop.util.ConnectionUtil;
 
-public class CartItemsDAO implements CartItemsInterface {
+
+
+
+
+public class CartItemsDAO  {
 	
 	       // To get Connection from connection util
-	       Connectionutil obj = new Connectionutil();
+	       ConnectionUtil obj = new ConnectionUtil();
 	       PreparedStatement pstmt =null;
-	   
-	       
 	    public void insert(CartItems cartit) {		
 		Connection con;
 	
@@ -26,8 +27,8 @@ public class CartItemsDAO implements CartItemsInterface {
 			con = obj.getDbConnect();
 			String query = "insert into Cart_items(pet_id,customer_id,quantity,unit_price,total_price) values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, cartit.getPetId());
-			pstmt.setInt(2, cartit.getCustomerId());
+			pstmt.setInt(1, cartit.getPet().getPetId());
+			pstmt.setInt(2, cartit.getCustomer().getCustomerId());
 			pstmt.setInt(3, cartit.getQuantity());
 			pstmt.setDouble(4, cartit.getUnitPrice());
 			pstmt.setDouble(5, cartit.getTotalPrice());
@@ -73,19 +74,25 @@ public class CartItemsDAO implements CartItemsInterface {
 	}
 
 	
-	public List<CartItems> show(Customers cus)  {	
+	public List<CartItems> showMyCart(Customers customer)  {	
 		Connection con;
-		List<CartItems> cartList= new ArrayList<CartItems>();
+	     List<CartItems> cartList= new ArrayList<CartItems>();
 		try {
 			con = obj.getDbConnect();
-			CartItems cartItem=null;
-			String query = "select * from cart_items where customer_id='"+cus.getCustomerId()+"'";
+			CartItems cartItem=new CartItems();
+			String query = "select ci.item_id,ci.pet_id,ci.customer_id,ci.quantity,ci.unit_price,ci.total_price,p.pet_type,p.pet_name,pet_image from cart_items ci inner join pet_details p on p.pet_id=ci.pet_id where ci.customer_id="+customer.getCustomerId()+" order by ci.item_id";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery(); 
-			while (re.next()) {
-				cartItem=new CartItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
-			cartList.add(cartItem);
+			ResultSet resultSet = pstmt.executeQuery(); 
+			while (resultSet.next()) {
+				cartItem=new CartItems(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getDouble(5),resultSet.getDouble(6));
+				cartItem.getPet().setPetType(resultSet.getString(7));
+				cartItem.getPet().setPetName(resultSet.getString(8));
+				cartItem.getPet().setPetImage(resultSet.getString(9));
+				
+			    cartList.add(cartItem);
+			    System.out.println(cartList);
 			}
+			 return cartList;
 			 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

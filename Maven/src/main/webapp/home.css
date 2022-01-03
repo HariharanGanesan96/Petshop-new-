@@ -2,42 +2,68 @@
 *{
     margin: 0;
     padding: 0;
+    color: white;
+}
+.backgroundpage{
+   background-image:linear-gradient(rgba(0,0,0,.5)50%,rgb(0,0,0,.5)50%), url("https://images.pexels.com/photos/7282845/pexels-photo-7282845.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+   background-repeat: no-repeat;
+   background-size: cover;
+   width: 100%;
+   height: 250vh;
 }
 .head{
-    height: 45px;
+    height: 40px;
     width: 100%;
-    background-color: rgb(177, 174, 169);
     padding-top: 15px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;  
+  
 }
+a:active {
+    background-color: yellow;
+  }
 h1{
     display: inline;
     width: 300px;
     position: absolute;
-    top: 5px;
+    top: 15px;
+    left: 10px;
     font-size: x-large;
 }
 #search{
     width: 100px;
     height: 30px;
     border: 1px solid;
+    border-color: tomato ;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-top-right-radius: 10px;
     border-left: none;
     position: absolute;
     left: 630px;
+    background-color:tomato;
+    margin-top: -2px;
 }
+
 #searchinput{
     padding-left: 10px;
     position: absolute;
-    top: 15px;
+    font-size: 17px;
+    color: white;
+    top: 13px;
     left: 330px;
     width: 300px;
     height: 30px;
     border: 1px solid;
     border-color: tomato;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius:10px;
     background-color: transparent;
-    color: black;
     border-right: none;
+}
+#searchinput::placeholder{
+    color: rgb(199, 181, 181);
 }
 input:focus{
     outline: none;
@@ -51,17 +77,25 @@ input:focus{
     display: inline;
 }
 #menu a{
-    color: black;
+    color: white;
+    font-weight: bold;
     text-decoration: none;
     float: right;
     padding-right: 20px;
+    margin-top: 2px;
+    transition: 0.5s;
 }
-.animalscategory {
-    padding-top: 20px;
+#menu a:hover{
+    color: tomato;
+}
+.petlist{
     margin-top: 40px;
-}
-.animalscategory h2{
+    padding-top:20px;
     margin-left: 50px;
+    transition: 0.5s;
+}
+ h2:hover{
+    color: tomato;
 }
 .animalscategory button{
     width: 275px;
@@ -69,19 +103,20 @@ input:focus{
     margin-top: 20px;
     margin-left: 50px;
     background-color: transparent;
-    border: 1px solid;
-    border-color: rgb(29, 58, 138);
+    border: none;
+    border-radius: 8px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
     font-weight: bold;
-    color:white;
+    color:rgb(255, 255, 255);
 }
+
 #dog{
     background-image: linear-gradient(rgba(0,0,0,.1)50%,rgba(0,0,0,.1)50%), url("https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-size: cover;
 }
 #cat{
-    background-image: linear-gradient(rgba(0,0,0,.1)50%,rgba(0,0,0,.1)50%), url("https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image: linear-gradient(rgba(0,0,0,.1)50%,rgba(0,0,0,.1)50%), url("https://images.pexels.com/photos/2643812/pexels-photo-2643812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     background-size: cover;
 }
 #birds{
@@ -89,6 +124,41 @@ input:focus{
     background-size: cover;
 }
 #fish{
-    background-image: linear-gradient(rgba(0,0,0,.1)50%,rgba(0,0,0,.1)50%), url("https://images.pexels.com/photos/60090/pexels-photo-60090.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-image: linear-gradient(rgba(0,0,0,.1)50%,rgba(0,0,0,.1)50%), url("https://th-thumbnailer.cdn-si-edu.com/NaGo-Ynjy5Op3n9PYq7iySRQAO8=/1000x750/filters:no_upscale()/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/d6/93/d6939718-4e41-44a8-a8f3-d13648d2bcd0/c3npbx.jpg");
     background-size: cover;
+}
+#pets img{
+    width: 200px;
+    height: 240px;
+    border-radius: 10px;
+   
+}
+#pets {
+    margin-left: 45px;
+    margin-top: 20px;
+    line-height: 2;
+    font-size: 18px;
+    background-color:  transparent;
+    border-radius: 10px;
+}
+
+.petdetails{
+    width: 200px;
+}
+#pets span{
+    margin-left: 10px;
+    color: white;
+}
+#pets button{
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 120px;
+    height: 30px;
+    background-color: rgb(16, 177, 16);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+
 }

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,64 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal register</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        .animalform {
-            position: absolute;
-            left: 3%;
-            top: 10%;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 22px; 
-            
-        }
-        table{
-            margin-top: -30px;
-            height: 550px;
-            border-radius: 5px;
-            width: 430px;
-            padding-left: 20px;
-            background-color: rgba(194, 204, 198, 0.959);
-        }
-        table th,td {
-            padding-left: 10px;
-        }
-        table input:focus{
-        outline: none;
-        }
-        table input{
-            width: 250px;
-            height: 30px;
-            border-radius: 5px;
-            border: none;
-        }
-        table button{
-            width: 130px;
-            height: 30px;
-            color: white;
-            background-color: rgb(61, 160, 36);
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #background{
-            background:linear-gradient(rgba(0,0,0,.5)50%,rgba(0,0,0,.5)50%) ,url("https://wallpaperaccess.com/full/472042.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 100vh;
-        }
-        textarea{
-            width: 250px;
-            height: 50px;
-            border-radius: 5px;
-            border: none;
-            resize: none;
-        }
-       
-    </style>
+     <link rel="stylesheet" href="AddItem.css">
 </head>
 
 <body>

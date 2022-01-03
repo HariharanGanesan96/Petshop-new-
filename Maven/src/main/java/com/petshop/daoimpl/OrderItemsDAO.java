@@ -7,28 +7,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.petshop.dao.OrderItemsInterface;
-import com.petshop.dao.Ordersinterface;
-import com.petshop.model.CartItems;
 import com.petshop.model.Customers;
 import com.petshop.model.OrderItems;
-import com.petshop.model.Orders;
+import com.petshop.util.ConnectionUtil;
+
+
+
+
 
 
 
 public class OrderItemsDAO  {
 	
-	Connectionutil obj = new Connectionutil();
+	ConnectionUtil obj = new ConnectionUtil();
 	public void insert(OrderItems orditm) {
-
-		Connectionutil obj = new Connectionutil();
 		Connection con;
 		try {
 			con = obj.getDbConnect();
 			String query = "insert into order_items (order_id,pet_id,quantity,unit_price,total_price) values(?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, orditm.getOrderId());
-			pstmt.setInt(2, orditm.getPetId());
+			pstmt.setInt(1, orditm.getOrders().getOrderId());
+			pstmt.setInt(2, orditm.getPet().getPetId());
 			pstmt.setInt(3, orditm.getQuantity());
 			pstmt.setDouble(4, orditm.getUnitPrice());
 			pstmt.setDouble(5, orditm.getTotalPrice());
@@ -47,7 +46,7 @@ public class OrderItemsDAO  {
 			con = obj.getDbConnect();
 			String query = "delete from order_items where item_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, ord.getOrderId());
+			pstmt.setInt(1, ord.getOrders().getOrderId());
 			System.out.println(pstmt.executeUpdate() + " rows deleted");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
