@@ -16,6 +16,7 @@ import com.petshop.util.ConnectionUtil;
 public class CustomerDAO {
 
 	ConnectionUtil obj = new ConnectionUtil();
+	List<Customers> customerList=new ArrayList<Customers>();
 
 	public void insert(Customers cus)  {
 		Connection con;
@@ -184,23 +185,26 @@ public class CustomerDAO {
 		return flag;
 	}
 
-	public void showCustomerList(){
+	public List<Customers> showCustomerList(){
 		Connection con;
+		
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from customers";
 			PreparedStatement pstmt = con.prepareStatement(query);
+			  Customers customerDetails=null;
 			ResultSet re = pstmt.executeQuery();
 			while (re.next()) {	
-	        	System.out.format("%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s,%15s",
-	        			re.getInt(1), re.getString(2), re.getString(3), re.getString(4),re.getString(5),
-	        			re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
-				        re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
+	        	customerDetails=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
+						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
+						re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
+	        	customerList.add(customerDetails);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return customerList;
 		
 	}
 	

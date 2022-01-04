@@ -27,12 +27,11 @@
         <input type="search" id="searchinput" placeholder="Enter pet category or name">
         <button id="search">search</button>
         <ul  id="menu">
-        <li><a href="Adminprofile.jsp">My Profile</a></li>
+        <li><a href="AdminProfile.jsp">My Profile</a></li>
         <li><a href="UserList.jsp">User List</a></li>
-        <li><a href="home.jsp">Home</a></li>
+        <li><a href="AdminHome.jsp">Home</a></li>
         </ul>
         </div>
-        
         
         <h2 class="petlist">Not Approved Pet List</h2>
         

@@ -13,7 +13,7 @@
 </head>
 <body>
 <%
-Customers customerDetails=new Customers();
+  Customers customerDetails=new Customers();
   customerDetails=(Customers)session.getAttribute("customer");
   OrderItemsDAO orderItemDao=new OrderItemsDAO();
   ResultSet rs=orderItemDao.showMyOrders(customerDetails);

@@ -28,7 +28,6 @@ public class login extends HttpServlet{
 		String passwowrd=req.getParameter("passwordinput");
 		
 		Customers customerValidation=new Customers(userName,passwowrd);
-		
 		CustomerDAO customerDao=new CustomerDAO();
 		
 		String firstName=customerDao.cusValidation(customerValidation);

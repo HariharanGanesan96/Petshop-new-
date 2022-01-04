@@ -100,6 +100,25 @@ public class CartItemsDAO  {
 		}
 		return cartList;
 	}
+	
+	public CartItems showCart(int itemId)  {	
+		Connection con;
+	     CartItems cartItems= new CartItems();
+		try {
+			con = obj.getDbConnect();
+			CartItems cartItem=new CartItems();
+			String query = "select * from cart_items where item_id="+itemId+"";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			ResultSet resultSet = pstmt.executeQuery(); 
+			while (resultSet.next()) {
+				cartItem=new CartItems(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getDouble(5),resultSet.getDouble(6));						 
+			}	 
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cartItems;
+	}
 
 	
 }

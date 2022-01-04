@@ -78,6 +78,7 @@ input:focus{
 }
 #menu a{
     color: white;
+    font-size:20px;
     font-weight: bold;
     text-decoration: none;
     float: right;

@@ -57,7 +57,7 @@ table img {
 	height: 350px;	
     margin-left: 20px;
 }
-table button{
+#buynow{
 	width: 120px;
 	height: 30px;
 	font-size: 15px;
@@ -67,17 +67,30 @@ table button{
 	border-radius: 5px;
 	background-color:  rgb(16, 177, 16);
 }
-#quantity{
+#view{
 	width: 120px;
 	height: 30px;
 	font-size: 15px;
 	font-weight:bold;
-	color: black;
+	color: white;
     border: none;
 	border-radius: 5px;
+	background-color:  rgb(16, 177, 16);
 }
+#remove{
+	width: 120px;
+	height: 30px;
+	font-size: 15px;
+	font-weight:bold;
+	color: white;
+    border: none;
+	border-radius: 5px;
+	background-color: tomato ;
+}
+
 #buyall{
-	margin-left: 500px;
+	margin-left: 450px;
+	margin-top:30px;
 	width: 120px;
 	height: 30px;
 	font-size: 15px;
@@ -85,6 +98,23 @@ table button{
 	color: white;
     border: none;
 	border-radius: 5px;
-	background-color:  rgb(16, 177, 16);
-	
+	background-color:  rgb(16, 177, 16);	
+}
+#removeall{
+	margin-left: 20px;
+	margin-top:30px;
+	width: 120px;
+	height: 30px;
+	font-size: 15px;
+	font-weight:bold;
+	color: white;
+    border: none;
+	border-radius: 5px;
+	background-color: tomato;	
+}
+#empty{
+	position:absolute;
+	margin-top: 40px;
+	margin-left: 40px;
+	font-size: 30px;
 }
