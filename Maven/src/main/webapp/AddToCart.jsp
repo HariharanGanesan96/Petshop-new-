@@ -15,15 +15,18 @@
 </head>
 <body>
 
-<%  boolean available=true;
+<%  
+    boolean available=true;
+
     PrintWriter out1=response.getWriter();
     CartItemsDAO cartItemDao=new CartItemsDAO();
+    
     Customers customerDetails=(Customers)session.getAttribute("customer");
     
     PetDetails pet=(PetDetails)session.getAttribute("pet");
     
-    
     List<CartItems> cartList=new ArrayList<CartItems>();
+    
     cartList=cartItemDao.showMyCart(customerDetails);
     
     PrintWriter write=response.getWriter();
@@ -37,14 +40,19 @@
     		break;
     	}
     }
+    
    if(available){
     int quantity=Integer.parseInt(request.getParameter("quantity"));  
+    
     CartItems cart=new CartItems();
+    
     cart.getPet().setPetId(pet.getPetId());
     cart.getCustomer().setCustomerId(customerDetails.getCustomerId());
     cart.setQuantity(quantity);
     cart.setUnitPrice(pet.getPetprice());
     cart.setTotalPrice(quantity*pet.getPetprice());
+    
+    
     CartItemsDAO cartItemsDao=new CartItemsDAO();
     cartItemsDao.insert(cart);
     write.print("item add to cart");

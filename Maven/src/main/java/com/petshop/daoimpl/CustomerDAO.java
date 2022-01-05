@@ -18,6 +18,7 @@ public class CustomerDAO {
 	ConnectionUtil obj = new ConnectionUtil();
 	List<Customers> customerList=new ArrayList<Customers>();
 
+	//Register user
 	public void insert(Customers cus)  {
 		Connection con;
 		try {
@@ -42,27 +43,30 @@ public class CustomerDAO {
 		
 	}
 	
-	public void update(Customers cus)  {
+	//update Customer profile
+	public void update(Customers customer)  {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
 			String query = "update Customers set customer_firstname=?,customer_lastname=?,"
 					+ "customer_username=?,customer_password=?,customer_email=?,customer_mobilenumber=?,customer_gender=? where customer_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cus.getFirstName());
-			pstmt.setString(2, cus.getLastName());
-			pstmt.setString(3, cus.getUserName());
-			pstmt.setString(4, cus.getPassword());
-			pstmt.setString(5, cus.getEmail());
-			pstmt.setLong(6, cus.getNumber());
-			pstmt.setString(7, cus.getGender());
-			pstmt.setInt(8, cus.getCustomerId());
+			pstmt.setString(1, customer.getFirstName());
+			pstmt.setString(2, customer.getLastName());
+			pstmt.setString(3, customer.getUserName());
+			pstmt.setString(4, customer.getPassword());
+			pstmt.setString(5, customer.getEmail());
+			pstmt.setLong(6, customer.getNumber());
+			pstmt.setString(7, customer.getGender());
+			pstmt.setInt(8, customer.getCustomerId());
 			System.out.println(pstmt.executeUpdate() + " rows updated");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
+	
+	// update Address details
 	public void updateAddressDetails(Customers cus)  {
 		Connection con;
 		try {
@@ -80,14 +84,16 @@ public class CustomerDAO {
 		}
 		
 	}	
-
-	public void delete(Customers customer) {
+    
+	//Update customer status
+	public void delete(Customers customer,String status) {
 		Connection con;
 		try {
 			con = obj.getDbConnect();
-			String query = "delete from Customers where customer_id=?";
+			String query = "update Customers set status=? where customer_id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, customer.getCustomerId());
+			pstmt.setString(1, status);
+			pstmt.setInt(2, customer.getCustomerId());
 			System.out.println(pstmt.executeUpdate() + " rows deleted");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -96,6 +102,7 @@ public class CustomerDAO {
 		
 	}
 
+	//customer validation login
 	public String cusValidation(Customers cus) {
 		Connection con;
 		try {
@@ -128,9 +135,11 @@ public class CustomerDAO {
 		return null;
 	}
 
+	
+	//Username validation
 	public boolean ValidatUsername(String cus)  {
 		Connection con;
-		boolean flag = false;
+		boolean flag = true;
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from customers where customer_username=?";
@@ -139,14 +148,14 @@ public class CustomerDAO {
 			ResultSet re = pstmt.executeQuery();
 			if (re.next()) {
 
-				flag = true;
+				flag = false;
 			} else if (true) {
 				query = "select admin_firstname from admin_details where admin_username=?";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, cus);
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
-					flag = true;
+					flag = false;
 
 				}
 			}
@@ -158,9 +167,10 @@ public class CustomerDAO {
 		return flag;
 	}
 
+	// Email validation
 	public boolean ValidateEmail(String cus) {
 		Connection con;
-		boolean flag = false;
+		boolean flag = true;
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from customers where customer_email=?";
@@ -168,14 +178,14 @@ public class CustomerDAO {
 			pstmt.setString(1, cus);
 			ResultSet re = pstmt.executeQuery();
 			if (re.next()) {
-				flag = true;
+				flag = false;
 			} else if (true) {
 				query = "select admin_email from admin_details where admin_email=?";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, cus);
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
-					flag = true;
+					flag = false;
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -185,6 +195,7 @@ public class CustomerDAO {
 		return flag;
 	}
 
+	// Show all customer
 	public List<Customers> showCustomerList(){
 		Connection con;
 		
@@ -208,7 +219,7 @@ public class CustomerDAO {
 		
 	}
 	
-	
+	//my Profile
 	public Customers customerDetails(String userName) {	
 		Customers customer =null;
 		Connection con;
@@ -232,30 +243,9 @@ public class CustomerDAO {
 
 		return customer;
 	}
-	public Customers customerDetails(int customerId) {	
-		System.out.println(customerId);
-		Customers customer =null;
-		Connection con;
-		try {
-			con = obj.getDbConnect();
-			String query = "select * from customers where Customer_id="+customerId+"";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery();
-			while (re.next()) {
-				 customer=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
-						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
-						re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
-				
-			}
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(customer);
+	
 
-		return customer;
-	}
+	
 	public void updateImage(Customers cus)  {
 		Connection con;
 		try {

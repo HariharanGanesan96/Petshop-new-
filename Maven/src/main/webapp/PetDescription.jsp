@@ -74,13 +74,15 @@
                </div>
              <tr>
     <script>
-    function addToCart(){  
-    	console.log("called"); 
+    
+    
+    function addToCart(){     
         let qty=document.getElementById("quantity").value;
         console.log(qty);
         if(qty>0){
         document.getElementById("message").innerHTML=" ";
     	var url="AddToCart.jsp?quantity="+qty;  
+    	
     	if(window.XMLHttpRequest){  
     		request=new XMLHttpRequest();  
     		}  

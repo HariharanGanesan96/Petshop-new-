@@ -46,7 +46,7 @@ public class BuyCart extends HttpServlet{
     	   
     	   PetDetails pet =petDao.showPet(cartItems.getPet().getPetId());
     	   CustomerDAO customerDao=new CustomerDAO();   
-    	   Customers petCustomerDetails=customerDao.customerDetails(pet.getCustomer().getCustomerId());
+    	   Customers petCustomerDetails=customerDao.customerDetails(pet.getCustomer().getUserName());
     	   
     	   
     	   if(customerDetails.getWallet()>(cartItems.getTotalPrice())){  

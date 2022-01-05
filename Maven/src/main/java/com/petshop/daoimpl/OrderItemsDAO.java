@@ -20,6 +20,8 @@ import com.petshop.util.ConnectionUtil;
 public class OrderItemsDAO  {
 	
 	ConnectionUtil obj = new ConnectionUtil();
+	
+	// insert order items
 	public void insert(OrderItems orditm) {
 		Connection con;
 		try {
@@ -53,6 +55,7 @@ public class OrderItemsDAO  {
 			e.printStackTrace();
 		}
 	}
+	
 	public ResultSet showMyOrders(Customers cus)  {
 		Connection con;
 		ResultSet re=null;

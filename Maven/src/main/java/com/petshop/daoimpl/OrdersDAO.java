@@ -35,7 +35,7 @@ public class OrdersDAO{
 		}
 	}
         
-	// To delete particular order from order table
+	// To cancel particular order from order table
 	public void updateStatus(int ordId)  {
 		Connection con;
 		try {
@@ -51,7 +51,7 @@ public class OrdersDAO{
 		
 	}
     
-	// To show the all the orders 
+	// To show my orders 
 	
 	public List<Orders> showMyOrders(int cusId) {
 		Connection con;

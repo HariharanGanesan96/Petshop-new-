@@ -18,7 +18,7 @@ public class PetDAO {
 	   PetDetails pet=new PetDetails();
 	   
 	   ConnectionUtil obj = new ConnectionUtil();
-	 // insert operation from user
+	 // insert pet_details
 	public void insert(PetDetails pet) {
 		Connection con;
 		try {
@@ -44,7 +44,8 @@ public class PetDAO {
 			e.printStackTrace();
 		}
 	}
-
+    
+	//Update pet_details
 	public void update(PetDetails pet) {
 		Connection con;
 		try {
@@ -76,7 +77,7 @@ public class PetDAO {
 		}
 	}
 
-	// To update pet Status
+	// To update pet Status admin approval
 	public void updateStatus(int petId,String status,int adminId) {
 		Connection con;
 		try {
@@ -199,7 +200,7 @@ public class PetDAO {
 			Connection con;
 			try {
 				con = obj.getDbConnect();
-				String query = "delete from pet_details where pet_id=?";
+				String query = "update pet_details set status='deleted' where pet_id=?";
 				PreparedStatement pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, pet.getPetId());
 				System.out.println(pstmt.executeUpdate() + " rows deleted");

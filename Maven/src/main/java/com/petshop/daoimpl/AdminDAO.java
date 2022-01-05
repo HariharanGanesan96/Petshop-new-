@@ -19,11 +19,13 @@ public class AdminDAO {
 	
 	public void insert(Admin adm) throws SQLException, ClassNotFoundException {
 	Connection con = obj.getDbConnect();
-	String query = "insert into animals_Adminuser values(?,?,?,?,?);";
+	String query = "insert into animals_Adminuser values(?,?,?,?,?)";
 	PreparedStatement pstmt = con.prepareStatement(query);
 	pstmt.setInt(1, adm.getAdminId());
 	pstmt.setString(2, adm.getUserName());
 	pstmt.setString(3, adm.getPassword());
+	pstmt.setString(3, adm.getPassword());
+	pstmt.setString(4, adm.getPassword());
 	pstmt.setDate(5, adm.getRegisterDate());
 	
 	System.out.println(pstmt.executeUpdate() + " rows inserted");
@@ -46,6 +48,7 @@ public void delete(Admin anim) throws SQLException, ClassNotFoundException {
 	System.out.println(pstmt.executeUpdate() + " rows deleted");
 }
 
+// Admin profile
 public Admin show(String username) throws SQLException, ClassNotFoundException {
 	
 	Connection con = obj.getDbConnect();

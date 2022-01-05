@@ -99,9 +99,18 @@ table tr,td{
     color: white;
     background-color: tomato;
     border: none;
+    margin:auto;
     border-radius: 10px;
-    margin-top: 40px;
-    margin-left: 50px;
+}
+#update1{
+    width: 130px;
+    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background-color: tomato;
+    border: none;
+    border-radius: 10px;
 }
 #updatewallet {
     width: 120px;
