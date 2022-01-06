@@ -28,11 +28,10 @@
         </ul>
         </div>
         </div>
-  
     <table>
         <tbody>
             <tr>
-            <form  onsubmit="return updateProfile();" action="UpdateProfile">
+            <form action="UpdateProfile">
                <td rowspan="7"><img src="https://media1.popsugar-assets.com/files/thumbor/gMCOEkYB_3qTEDUrUbxtJkuusAA/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2017/07/12/947/n/1922153/c6f2e6f1596698606ad0d6.04019961_edit_img_image_15110365_1499895175/i/Chris-Hemsworth-Grooming-Interview.jpg" alt=""></td>
                <td><label for="firstname">FirstName</label></td>
                <td><input type="text" name="firstname" value="<%=customerDetails.getFirstName()%>" pattern="[a-zA-Z]{3,20}" required></td>
@@ -55,33 +54,74 @@
               <td><label for="password">Password</label></td>
               <td><input type="text" name="password" value="<%=customerDetails.getPassword()%>" pattern="[a-zA-Z0-9!@#$%^&*()_+]+{8,20}" required></td>
               <td> <button type="submit" id="update">Update Profile</button>  </td>
-              <td><p id="updatemessage"></p><%=updateProfile %></td>  
+              <td></td>  
               </form>
          
               </tr>
               <tr>
+              <form action="UpdateAddress.jsp">
                 <td><label for="address">Street</label></td>
-                <td><input type="text" name="address" value="<%=customerDetails.getAddress()%>" required></td>
+                <td><input type="text" name="address" id="address" value="<%=customerDetails.getAddress()%>" required></td>
                 <td><label for="city">City</label></td>
-                <td><input type="text" name="city" value="<%=customerDetails.getCity()%>" required></td>
+                <td><input type="text" name="city" id="city"" value="<%=customerDetails.getCity()%>" required></td>
               </tr>
               <tr>
                 <td><label for="pincode">pincode</label></td>
-                <td><input type="text" name="pincode" value="<%=customerDetails.getPincode()%>" required>
-                <td><button type="submit" id="update1" >Update Address</button> </td>
-                <td><p></P></td>
+                <td><input type="text" name="pincode" id="pincode" value="<%=customerDetails.getPincode()%>" required>
+                <td><button type="submit" id="update1"  >Update Address</button> </td>
+                <td></td>
+                </form>
               </tr>
               <tr>      
-
+               <form >               
                 <td><label for="wallet">wallet</label></td>
-                <td><input type="text" name="wallet" value="<%=customerDetails.getWallet()%>" required></td>
-                <td><button id="updatewallet"><a href="updatewallet">Add amount</a></button></td>
-                <td></td>
-
+                <td><input type="text" value="<%=customerDetails.getWallet()%>" required></td>
+                <td><button id="updatewallet" onclick="UpdateWallet()" type="button"  >Add amount</button></td>
+                <td><input type="text" name="wallet"  id="updatewallet1" required></td>
+                </form>
         </tbody>
     </table>
 </div>
 </div>
+  <script type="text/javascript">
+  function UpdateWallet(){
+	  var wallet=document.getElementById("updatewallet1").value;
+	  console.log(wallet);
+  	var url="UpdateWallet1.jsp?wallet="+wallet;  
+    console.log("called");
+  	if(window.XMLHttpRequest){  
+  		request=new XMLHttpRequest();  
+  		}  
+  		else if(window.ActiveXObject){  
+  		request=new ActiveXObject("Microsoft.XMLHTTP");  
+  		}  
+  	try  
+  	{  
+  	request.onreadystatechange=getInfo;  
+  	request.open("GET",url,true);  
+  	request.send();  
+  	}  
+  	catch(e)  
+  	{  
+  	alert("Unable to connect to server");  
+  	}    
+  } 
+  
+  function getInfo(){  
+  	if(request.readyState==4){  
+  	var val=request.responseText;
+  	console.log(val);
+  	   alert(""+val);  
+  	}  
+  	}  
+  
+  
+ <%String message= (String)session.getAttribute("message");
+    if(!message.equals("none")) {%>
+ 
+  alert("<%=message%>");
 
+  <%} session.setAttribute("message","none"); %>
+  </script>
 </body>
 </html>

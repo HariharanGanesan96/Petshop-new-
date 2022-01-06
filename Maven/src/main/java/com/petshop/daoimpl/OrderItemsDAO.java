@@ -14,9 +14,6 @@ import com.petshop.util.ConnectionUtil;
 
 
 
-
-
-
 public class OrderItemsDAO  {
 	
 	ConnectionUtil obj = new ConnectionUtil();

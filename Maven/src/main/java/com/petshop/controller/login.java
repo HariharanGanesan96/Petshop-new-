@@ -42,9 +42,7 @@ public class login extends HttpServlet{
 				customerDetails = customerDao.customerDetails(userName);
 				System.out.println(customerDetails);
 				session.setAttribute("customer", customerDetails);
-				session.setAttribute("updateProfile", "  ");
-				session.setAttribute("updateAddress", "  ");
-				session.setAttribute("updateWallet","  ");
+				session.setAttribute("message", "none");
 				resp.sendRedirect("home.jsp");
 			}
 			else {

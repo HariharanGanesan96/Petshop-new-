@@ -208,7 +208,7 @@ public class CustomerDAO {
 			while (re.next()) {	
 	        	customerDetails=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
 						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
-						re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
+						re.getString(11), re.getInt(12), re.getString(12), re.getString(14),re.getString(15));
 	        	customerList.add(customerDetails);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -231,7 +231,7 @@ public class CustomerDAO {
 			while (re.next()) {
 				 customer=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
 						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
-						re.getString(11), re.getInt(12), re.getString(12), re.getString(14));
+						re.getString(11), re.getInt(12), re.getString(12), re.getString(14),re.getString(15));
 				
 			}
 			
@@ -244,7 +244,31 @@ public class CustomerDAO {
 		return customer;
 	}
 	
+	public Customers customerDetails(int customerId) {	
+		System.out.println(customerId);
+		Customers customer =null;
+		Connection con;
+		try {
+			con = obj.getDbConnect();
+			String query = "select * from customers where Customer_id="+customerId+"";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			ResultSet re = pstmt.executeQuery();
+			while (re.next()) {
+				 customer=new Customers(re.getInt(1), re.getString(2), re.getString(3), re.getString(4),
+						re.getString(5), re.getString(6), re.getString(7), re.getLong(8), re.getDouble(9), re.getDate(10),
+						re.getString(11), re.getInt(12), re.getString(12), re.getString(14),re.getString(15));
+				
+			}
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(customer);
 
+		return customer;
+	}
+	
 	
 	public void updateImage(Customers cus)  {
 		Connection con;

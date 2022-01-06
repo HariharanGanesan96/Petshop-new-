@@ -66,7 +66,7 @@ public class updateprofile extends HttpServlet{
          customerDao.update(customerDetails);
          updateProfile="profile updated";
          }
-         session.setAttribute("updateProfile", updateProfile);
+         session.setAttribute("message", updateProfile);
          resp.sendRedirect("myprofile.jsp");
        
          

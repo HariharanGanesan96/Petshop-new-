@@ -13,7 +13,7 @@
 
 <body>
     <div id="background">
-    <form class="animalform" action="">
+    <form class="animalform" action="AnimalForm.jsp">
         <table>
             <tr>
                 <th id="register" colspan="2">Register Animal</th>
@@ -24,36 +24,30 @@
                 <tr>
                     <td><label for="animaltype">Animal Type </label></td>
                     <td><input type="text" name="animaltype" id="animaltype" pattern="[a-zA-Z]{3,20}"  list="typelist" required></td>
-                </tr>
-                <tr>
                     <td><label for="animalname">Name</label></td>
-                    <td> <input type="text" name="animalname" id="animalname" pattern="[a-zA-Z]{3,20}" list="namelist" required></td>
+                    <td> <input type="text" name="animalname" id="animalname" pattern="[a-zA-Z ]{3,20}" list="namelist" required></td>
                 </tr>
                 <tr>
                     <td><label for="animalgender">Gender</label></td>
                     <td><input type="text" name="animalgender" id="animalgender" pattern="[a-zA-Z]{3,20}" list="genderlist" required></td>
-                </tr>
-                <tr>
                     <td><label for="dob" name="dob">Date of birth</label></td>
                     <td><input type="date" name="dob" id="dob"  ></td>
                 </tr>
                 <tr>
                     <td><label for="color">Color</label></td>
                     <td><input type="text" name="color" id="color" pattern="[a-zA-Z]{3,20}" list="colors" ></td>
-                </tr>
-                <tr>
                     <td><label for="price">price</label></td>
                     <td><input type="number" 5 name="price" id="price" min="0" required></td>
                 </tr>
                 <tr>
                     <td><label for="imagelink">Image Link</label></td>
                     <td><input type="text" 5 name="imagelink" id="imagelink"  required></td>
-                </tr>
-                <tr>
                     <td><label for="description">Description</label></td>
                     <td><textarea name="description" id="description" cols="30" required></textarea></td>
                 </tr>
                 <tr>
+                    <td><label for="qty">Quantity</label></td>
+                    <td><input type="number" 5 name="quantity" id="quantityt" min="0"  required></td>
                     <td><button>Register</button></td>
                 </tr>
             </tbody>

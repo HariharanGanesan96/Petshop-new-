@@ -1,7 +1,6 @@
 <%@page import="java.io.PrintWriter"%>
 <%@page import="com.petshop.daoimpl.*"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.petshop.daoimpl.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.petshop.model.*"%>
 <%@page import="java.sql.ResultSet"%>

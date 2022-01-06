@@ -18,7 +18,16 @@ public class Customers {
 	private int pincode;
 	private String gender;
 	private String image;
+	private String staus;
 		
+	public String getStaus() {
+		return staus;
+	}
+
+	public void setStaus(String staus) {
+		this.staus = staus;
+	}
+
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -174,7 +183,7 @@ public class Customers {
 	}
 	
 	public Customers(int customerId, String firstName, String lastName, String gender, String userName, String password, String email,
-			long number, double wallet, Date regDate, String address, int pincode, String image,String city) {
+			long number, double wallet, Date regDate, String address, int pincode, String image,String city,String status) {
 		super();
 		this.customerId = customerId;
 		this.firstName = firstName;
@@ -189,6 +198,8 @@ public class Customers {
 		this.pincode = pincode;
 		this.gender = gender;
 		this.image = image;
+		this.city=city;
+		this.staus=status;
 	}
 		
 	
