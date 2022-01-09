@@ -11,6 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My profile</title>
      <link rel="stylesheet" href="myprofile.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%Customers customerDetails=new Customers();
@@ -18,11 +20,12 @@
    String updateProfile=(String) session.getAttribute("updateProfile");%>
    <div class="head">
         <div class="navigation">
-        <h1>PET Shop</h1>
+        	<h1><i class="fas fa-paw" style="color: white;"></i> Pet Shop</h1>
         <ul  id="menu">
         <li><a href="myprofile.jsp">My Profile</a></li>
         <li><a href="mycart.jsp">My cart</a></li>
         <li><a href="myorders.jsp">My orders</a></li>
+        <li><a href="MyPets.jsp">My pets</a></li>
         <li><a href="AddItem.jsp">Add item</a></li>
         <li><a href="home.jsp">Home</a></li>
         </ul>
@@ -77,7 +80,7 @@
                 <td><label for="wallet">wallet</label></td>
                 <td><input type="text" value="<%=customerDetails.getWallet()%>" required></td>
                 <td><button id="updatewallet" onclick="UpdateWallet()" type="button"  >Add amount</button></td>
-                <td><input type="text" name="wallet"  id="updatewallet1" required></td>
+                <td><input type="text" name="wallet"  id="updatewallet1" min="0" value="0" required></td>
                 </form>
         </tbody>
     </table>
@@ -87,7 +90,7 @@
   function UpdateWallet(){
 	  var wallet=document.getElementById("updatewallet1").value;
 	  console.log(wallet);
-  	var url="UpdateWallet1.jsp?wallet="+wallet;  
+  	var url="UpdateWallet.jsp?wallet="+wallet;  
     console.log("called");
   	if(window.XMLHttpRequest){  
   		request=new XMLHttpRequest();  
@@ -116,12 +119,12 @@
   	}  
   
   
- <%String message= (String)session.getAttribute("message");
+ <%String message= (String)session.getAttribute("profileMessage");
     if(!message.equals("none")) {%>
  
   alert("<%=message%>");
 
-  <%} session.setAttribute("message","none"); %>
+  <%} session.setAttribute("profileMessage","none"); %>
   </script>
 </body>
 </html>

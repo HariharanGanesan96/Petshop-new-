@@ -31,7 +31,8 @@ public class updateprofile extends HttpServlet{
     	 boolean flag=true;
          HttpSession session=req.getSession();
          Customers customerDetails=(Customers)session.getAttribute("customer");
-         String updateProfile="";
+         Customers customers=new Customers();
+         String updateProfile="none";
          CustomerDAO customerDao=new CustomerDAO();
          String firstName=req.getParameter("firstname");
          String lastName=req.getParameter("lastname");
@@ -39,15 +40,16 @@ public class updateprofile extends HttpServlet{
 //         System.out.print(userName);
 //         System.out.print(customerDao.ValidatUsername(userName)==false);
 //         System.out.print(userName!=customerDetails.getUserName());
+         customers.setUserName(userName);
          
-         
-         if((customerDao.ValidatUsername(userName)==false) && (!userName.equals(customerDetails.getUserName()))) {
+         if((customerDao.ValidatUsername(customers)==false) && (!userName.equals(customerDetails.getUserName()))) {
         	updateProfile+="username not avliable";
         	flag=false;
          }
          String password=req.getParameter("password");
          String email=req.getParameter("email");
-         if((customerDao.ValidatUsername(email)==false) && (email!=customerDetails.getEmail())) {
+         customers.setEmail(email);
+         if((customerDao.ValidatUsername(customers)==false) && (email!=customerDetails.getEmail())) {
          	updateProfile +="  email not avliable";
          	flag=false;
           }
@@ -66,7 +68,7 @@ public class updateprofile extends HttpServlet{
          customerDao.update(customerDetails);
          updateProfile="profile updated";
          }
-         session.setAttribute("message", updateProfile);
+         session.setAttribute("profileMessage", updateProfile);
          resp.sendRedirect("myprofile.jsp");
        
          

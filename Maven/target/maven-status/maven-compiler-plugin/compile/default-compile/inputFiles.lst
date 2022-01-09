@@ -1,5 +1,4 @@
 E:\Java progaram\petshopnew\src\main\java\com\petshop\controller\login.java
-E:\Java progaram\petshopnew\src\main\java\com\petshop\controller\RemoveAllCartItems.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\dao\PetInterface.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\daoimpl\OrdersDAO.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\daoimpl\OrderItemsDAO.java
@@ -10,8 +9,8 @@ E:\Java progaram\petshopnew\src\main\java\com\petshop\model\Orders.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\model\PetDetails.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\dao\OrderItemsInterface.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\util\ConnectionUtil.java
+E:\Java progaram\petshopnew\src\main\java\com\petshop\controller\updateprofile.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\daoimpl\CustomerDAO.java
-E:\Java progaram\petshopnew\src\main\java\com\petshop\controller\RemoveCartItem.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\exception\QtyNotAvalilable.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\dao\CustomerInterface.java
 E:\Java progaram\petshopnew\src\main\java\com\petshop\daoimpl\CartItemsDAO.java

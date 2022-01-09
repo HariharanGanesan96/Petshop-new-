@@ -137,14 +137,14 @@ public class CustomerDAO {
 
 	
 	//Username validation
-	public boolean ValidatUsername(String cus)  {
+	public boolean ValidatUsername(Customers customer)  {
 		Connection con;
 		boolean flag = true;
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from customers where customer_username=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cus);
+			pstmt.setString(1, customer.getUserName());
 			ResultSet re = pstmt.executeQuery();
 			if (re.next()) {
 
@@ -152,7 +152,7 @@ public class CustomerDAO {
 			} else if (true) {
 				query = "select admin_firstname from admin_details where admin_username=?";
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, cus);
+				pstmt.setString(1, customer.getUserName());
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
 					flag = false;
@@ -168,21 +168,21 @@ public class CustomerDAO {
 	}
 
 	// Email validation
-	public boolean ValidateEmail(String cus) {
+	public boolean ValidateEmail(Customers customer) {
 		Connection con;
 		boolean flag = true;
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from customers where customer_email=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cus);
+			pstmt.setString(1, customer.getEmail());
 			ResultSet re = pstmt.executeQuery();
 			if (re.next()) {
 				flag = false;
 			} else if (true) {
 				query = "select admin_email from admin_details where admin_email=?";
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, cus);
+				pstmt.setString(1, customer.getEmail());
 				ResultSet re1 = pstmt.executeQuery();
 				if (re1.next()) {
 					flag = false;

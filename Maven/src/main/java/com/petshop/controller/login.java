@@ -33,16 +33,19 @@ public class login extends HttpServlet{
 		String firstName=customerDao.cusValidation(customerValidation);
 
 		HttpSession session=req.getSession();
+		session.setAttribute("message", " ");
 		if (firstName != null) {
 			String name = firstName.substring(1);
 			// customer login
 			if (firstName.charAt(0) == '1') {
-				System.out.println("welcome user: " + name);
+				session.setAttribute("message", "none");
+				session.setAttribute("profileMessage", "none");
+				//System.out.println("welcome user: " + name);
 				Customers customerDetails=new Customers(userName,passwowrd);
 				customerDetails = customerDao.customerDetails(userName);
-				System.out.println(customerDetails);
+				//System.out.println(customerDetails);
 				session.setAttribute("customer", customerDetails);
-				session.setAttribute("message", "none");
+				
 				resp.sendRedirect("home.jsp");
 			}
 			else {
@@ -54,14 +57,14 @@ public class login extends HttpServlet{
 						admin = adminDao.show(userName);
 						session.setAttribute("Admin", admin);
 						resp.sendRedirect("AdminHome.jsp");
-						System.out.println(admin);
+						//System.out.println(admin);
 					} catch (ClassNotFoundException | SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}	
 			}				
 }		else {
-	            session.setAttribute("error", "Invalid Username or Password ");
+	            session.setAttribute("message", "visible");
 	            resp.sendRedirect("index.jsp");
 }
 

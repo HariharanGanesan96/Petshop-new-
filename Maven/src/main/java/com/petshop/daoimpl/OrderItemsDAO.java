@@ -17,7 +17,9 @@ import com.petshop.util.ConnectionUtil;
 public class OrderItemsDAO  {
 	
 	ConnectionUtil obj = new ConnectionUtil();
-	
+	ResultSet resultSet=null;
+	OrderItems orderitems=new OrderItems();
+	List<OrderItems> orderItemList=new ArrayList<OrderItems>();
 	// insert order items
 	public void insert(OrderItems orditm) {
 		Connection con;
@@ -53,48 +55,57 @@ public class OrderItemsDAO  {
 		}
 	}
 	
-	public ResultSet showMyOrders(Customers cus)  {
+	public List<OrderItems> showMyOrders(Customers cus)  {
 		Connection con;
-		ResultSet re=null;
+		
 		System.out.println(cus.getCustomerId());
 		try {
 			con = obj.getDbConnect();
-			String query = "select oi.order_id,oi.pet_id,p.pet_name,oi.quantity,oi.unit_price,oi.total_price,o.order_status,o.order_date "
+			String query = "select oi.order_id,oi.pet_id,p.pet_name,oi.quantity,oi.unit_price,oi.total_price,o.order_status,o.order_date,p.pet_image "
 					+ "from order_items oi inner join orders o on oi.order_id=o.order_id inner join pet_details p on oi.pet_id=p.pet_id "
 					+ "where o.customer_id='"+cus.getCustomerId()+"' order by o.order_id";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			re = pstmt.executeQuery();
-//			    System.out.format("[%10s,%10s,%10s,%10s,%10s,%10s,%15s]\n","itemId","orderId","petId","quantity","unitPrice","totalPrice","staus");
-//			    System.out.println("-------------------------------------------------------------------------------------------");
-//			while (re.next()) {
-//			System.out.format("[%10s,%10s,%10s,%10s,%10s,%10s,%15s]\n",re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6),re.getString(7));
-//						    
-//			}
-			return re;
-		} catch (ClassNotFoundException | SQLException e) {
+			resultSet = pstmt.executeQuery();	
+			while (resultSet.next()) {
+				orderitems=new OrderItems();
+				orderitems.getOrders().setOrderId(resultSet.getInt(1));
+				orderitems.getPet().setPetId(resultSet.getInt(2));
+				orderitems.getPet().setPetName(resultSet.getString(3));
+				orderitems.setQuantity(resultSet.getInt(4));
+				orderitems.setUnitPrice(resultSet.getDouble(5));
+				orderitems.setTotalPrice(resultSet.getDouble(6));
+				orderitems.getOrders().setOrderStatus(resultSet.getString(7));
+				orderitems.getOrders().setOrderDate(resultSet.getDate(8));
+				orderitems.getPet().setPetImage(resultSet.getString(9));
+				
+				orderItemList.add(orderitems);
+			}		
+		}
+		
+		 catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		return re;
+		return orderItemList;
 	}
 	public List<OrderItems> getCurrentOrder(int orderId){
 		// TODO Auto-generated method stub
-		List<OrderItems> updateList=new ArrayList<OrderItems>();
+		
 		Connection con;
 		try {
 			con = obj.getDbConnect();
 			String query = "select * from order_items where order_id='"+orderId+"'";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			ResultSet re = pstmt.executeQuery();
-			while(re.next()) {
-				OrderItems orderitems=new OrderItems(re.getInt(1),re.getInt(2),re.getInt(3),re.getInt(4),re.getDouble(5),re.getDouble(6));
-				updateList.add(orderitems);
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()) {
+				orderitems=new OrderItems(resultSet.getInt(1),resultSet.getInt(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getDouble(5),resultSet.getDouble(6));
+				orderItemList.add(orderitems);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return updateList;
+		return orderItemList;
 			}	
 }

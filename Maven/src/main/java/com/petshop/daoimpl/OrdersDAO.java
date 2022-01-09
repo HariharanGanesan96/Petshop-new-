@@ -36,7 +36,7 @@ public class OrdersDAO{
 	}
         
 	// To cancel particular order from order table
-	public void updateStatus(int ordId)  {
+	public void updateStatus(Orders order)  {
 		Connection con;
 		try {
 			con = obj.getDbConnect();

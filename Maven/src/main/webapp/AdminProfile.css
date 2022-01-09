@@ -32,6 +32,7 @@ h1{
 }
 #menu a{
     color: white;
+    font-size:22px;
     font-weight: bold;
     text-decoration: none;
     float: right;
@@ -86,7 +87,6 @@ table img{
     border-color:black;
 }
 table tr,td{
-    margin-left: 20px;
     padding-left: 25px;
     padding-top: 20px;
 }

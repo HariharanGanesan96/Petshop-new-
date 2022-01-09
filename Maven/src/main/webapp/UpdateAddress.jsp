@@ -18,6 +18,7 @@ customer.setCity(city);
 customer.setPincode(pinCode);
 CustomerDAO customerDao=new CustomerDAO();
 customerDao.updateAddressDetails(customer);
+session.setAttribute("profileMessage", "address updated");
 response.sendRedirect("myprofile.jsp");
 %>
 </body>

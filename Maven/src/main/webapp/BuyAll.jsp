@@ -4,20 +4,14 @@
 <%@page import="com.petshop.daoimpl.*"%>
 <%@page import="java.util.*"%>
 <%@page import="com.petshop.model.*"%>
-<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 <% 
-   Double totalPrice=Double.parseDouble(request.getParameter("totalCartAmount"));
-
-   List<CartItems> cartList=(List<CartItems>) request.getAttribute("cartList");
+   double totalPrice=(Double)session.getAttribute("totalCartAmount");
+ 
+   List<CartItems> cartList=(List<CartItems>)session.getAttribute("cartList");
+   
+   System.out.println(cartList.size());
  
    Customers customerDetails=(Customers)session.getAttribute("customer");
    
@@ -30,6 +24,7 @@
    OrderItems orderItems=new OrderItems();
    OrderItemsDAO orderItemsDao=new OrderItemsDAO(); 
    
+   CartItemsDAO cartItemsDao=new CartItemsDAO();
    boolean flage=true;
    if(customerDetails.getWallet()>=totalPrice){
 	   for(CartItems cartItems: cartList){
@@ -38,7 +33,7 @@
 			   flage=false;
 			   write.print("Quantity not Avialble item Id "+cartItems.getItemId());
 		   }
-	   }
+	   }  
    if(flage){
    orders.getCustomer().setCustomerId(customerDetails.getCustomerId());
    orders.setTotalprice(totalPrice);
@@ -66,15 +61,17 @@
    petCustomerDetails.setWallet(petCustomerDetails.getWallet()+(cartItems.getTotalPrice()));
    customerDao.updateWallet(petCustomerDetails);
    
+   cartItemsDao.delete(cartItems.getItemId());
+   
    } 
    //update buyer wallet
    customerDetails.setWallet(customerDetails.getWallet()-totalPrice);
    customerDao.updateWallet(customerDetails);
+   
+   write.print("order placed successfully");
    }
    }
    else{
 	   write.print("wallet balance is low");
    }
    %>
-</body>
-</html>

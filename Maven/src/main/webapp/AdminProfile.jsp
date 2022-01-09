@@ -9,13 +9,15 @@
 <meta charset="ISO-8859-1">
 <title>Admin profile</title>
   <link rel="stylesheet" href="AdminProfile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/aeca6704b2.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <% Admin adminDetails=new Admin();
   adminDetails=(Admin)session.getAttribute("Admin");%>
 
         <div class="navigation">
-        <h1>PET Shop</h1>
+        	<h1><i class="fas fa-paw" style="color: white;"></i> Pet Shop</h1>
         <ul  id="menu">
         <li><a href="Adminprofile.jsp">My Profile</a></li>
         <li><a href="UserList.jsp">User List</a></li>

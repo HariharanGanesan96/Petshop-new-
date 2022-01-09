@@ -7,22 +7,13 @@
 <%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 <% 
    int quantity=Integer.parseInt(request.getParameter("quantity"));
 
    PetDetails pet=( PetDetails)session.getAttribute("pet");
    
    Customers customerDetails=(Customers)session.getAttribute("customer");
-   
-  
-   
+
    PrintWriter write=response.getWriter();
    
    Orders orders=new Orders();
@@ -33,8 +24,7 @@
    CustomerDAO customerDao=new CustomerDAO();
    
    Customers petCustomerDetails=customerDao.customerDetails(pet.getCustomer().getCustomerId());
-   
-   
+ 
    if(customerDetails.getWallet()>(quantity*pet.getPetprice())){  
 	   if(pet.getAvilableQty()>=quantity){	   
    orders.getCustomer().setCustomerId(customerDetails.getCustomerId());
@@ -65,7 +55,7 @@
    petCustomerDetails.setWallet(petCustomerDetails.getWallet()+(quantity*pet.getPetprice()));
    customerDao.updateWallet(petCustomerDetails);
    
-   write.print("order placed sucussfully");
+   write.print("order placed sucussfully \n Current wallet Balance :"+customerDetails.getWallet()+"");
    }
 	   else{
 		   write.print("Quantity not avilable");
@@ -77,6 +67,3 @@
    }
   
   %>
-
-</body>
-</html>

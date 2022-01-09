@@ -18,13 +18,16 @@
 	String petName = request.getParameter("animalname");
 	String petGender = request.getParameter("animalgender");
 	String petDob = request.getParameter("dob");
-	SimpleDateFormat formet = new SimpleDateFormat("dd-mm-yyyy");
+	SimpleDateFormat formet = new SimpleDateFormat("yyyy-mm-dd");
 	Date date = formet.parse(petDob);
+	System.out.println(petDob);
+	System.out.println(date);
 	String petColor = request.getParameter("color");
 	double petPrice = Double.parseDouble(request.getParameter("price"));
 	String petImage = request.getParameter("imagelink");
 	String petDescription = request.getParameter("description");
 	int petQty = Integer.parseInt(request.getParameter("quantity"));
+	if(petQty>0){
 	PetDetails petDetails = new PetDetails();
 	PetDAO petDao=new PetDAO();
 	petDetails.setPetType(petType);
@@ -41,6 +44,10 @@
 	petDao.insert(petDetails);	
 	petDetails.setPetColor(petColor);
 	response.sendRedirect("AddItem.jsp");
+	}
+	else{
+		System.out.println("invalid qty");
+	}
 	%>
 </body>
 </html>

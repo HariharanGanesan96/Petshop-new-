@@ -64,6 +64,7 @@
 			petCustomerDetails.setWallet(petCustomerDetails.getWallet() + cartItems.getQuantity());
 			customerDao.updateWallet(petCustomerDetails);
 
+			cartDao.delete(cartItems.getItemId());
 			write.print("order placed sucussfully");
 		} else {
 
